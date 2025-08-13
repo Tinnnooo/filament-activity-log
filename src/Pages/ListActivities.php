@@ -21,9 +21,9 @@ abstract class ListActivities extends Page implements HasForms
     use InteractsWithForms;
     use WithPagination;
 
-    protected static string $view = 'filament-activity-log::list.index';
+    protected string $view = 'filament-activity-log::list.index';
 
-    protected static ?string $navigationIcon = 'heroicon-s-finger-print';
+    protected static string | BackedEnum | null $navigationIcon = 'heroicon-s-finger-print';
 
     public function getTitle(): string
     {
@@ -40,10 +40,10 @@ abstract class ListActivities extends Page implements HasForms
         $this->fillFilters();
     }
 
-    public function form(Form $form): Form
+    public function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
+        return $schema
+            ->components([
                 Section::make()
                     ->compact()
                     ->columns(5)
