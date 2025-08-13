@@ -8,7 +8,7 @@
         <x-filament-tables::table>
             <x-slot:header>
                 @foreach ($fields as $field)
-                    <x-filament-tables::header-cell class="!p-2">
+                    <x-filament-tables::header-cell class="p-2!">
                         {{ $field->getLabel() }}
                     </x-filament-tables::header-cell>
                 @endforeach

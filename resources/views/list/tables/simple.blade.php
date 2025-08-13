@@ -1,14 +1,14 @@
-<x-filament-tables::table class="w-full overflow-hidden text-sm !table-fixed">
+<x-filament-tables::table class="w-full overflow-hidden text-sm table-fixed!">
     <x-slot:header>
         <x-filament-tables::header-cell
             width="20%"
-            class="!py-2"
+            class="py-2!"
         >
             @lang('filament-activity-log::activities.table.field')
         </x-filament-tables::header-cell>
         <x-filament-tables::header-cell
             width="80%"
-            class="!py-2"
+            class="py-2!"
         >
             @lang('filament-activity-log::activities.table.value')
         </x-filament-tables::header-cell>
