@@ -2,9 +2,9 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "dev:styles": "npx tailwindcss -i resources/css/index.css -o resources/dist/filament-activity-log.css --watch",
+        "dev:styles": "npx @tailwindcss/cli -i resources/css/index.css -o resources/dist/filament-activity-log.css --watch",
         "dev:scripts": "node bin/build.js --dev",
-        "build:styles": "npx tailwindcss -i resources/css/index.css -o resources/dist/filament-activity-log.css --minify && npm run purge",
+        "build:styles": "npx @tailwindcss/cli -i resources/css/index.css -o resources/dist/filament-activity-log.css --minify && npm run purge",
         "build:scripts": "node bin/build.js",
         "purge": "filament-purge -i resources/dist/filament-activity-log.css -o resources/dist/filament-activity-log.css -v 3.x",
         "dev": "npm-run-all --parallel dev:*",
@@ -24,6 +24,7 @@
         "tailwindcss": "^4.1.11"
     },
     "dependencies": {
+        "@tailwindcss/cli": "^4.1.11",
         "diff": "^5.1.0"
     }
 }
