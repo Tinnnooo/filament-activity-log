@@ -2,11 +2,13 @@
 
 namespace Noxo\FilamentActivityLog\Pages;
 
+use BackedEnum;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
 use Filament\Pages\Page;
+use Filament\Schemas\Schema;
 use Filament\Tables\Concerns\CanPaginateRecords;
 use Livewire\WithPagination;
 use Spatie\Activitylog\Models\Activity;
