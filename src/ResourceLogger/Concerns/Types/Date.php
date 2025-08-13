@@ -2,6 +2,8 @@
 
 namespace Noxo\FilamentActivityLog\ResourceLogger\Concerns\Types;
 
+use Carbon\Carbon;
+use Exception;
 use Illuminate\Database\Eloquent\Model;
 
 trait Date
@@ -35,9 +37,9 @@ trait Date
             }
 
             try {
-                $state = \Carbon\Carbon::parse($state);
+                $state = Carbon::parse($state);
                 $state = $state?->translatedFormat($this->options);
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
             }
 
             return $state;

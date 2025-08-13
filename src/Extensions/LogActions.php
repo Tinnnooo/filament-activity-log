@@ -2,6 +2,27 @@
 
 namespace Noxo\FilamentActivityLog\Extensions;
 
+use Noxo\FilamentActivityLog\Extensions\Concerns\HasAssociations;
+use Noxo\FilamentActivityLog\Extensions\Concerns\HasCreated;
+use Noxo\FilamentActivityLog\Extensions\Concerns\HasDeleted;
+use Noxo\FilamentActivityLog\Extensions\Concerns\HasRestored;
+use Noxo\FilamentActivityLog\Extensions\Concerns\HasUpdated;
+use Filament\Actions\AttachAction;
+use Filament\Actions\CreateAction;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\DetachAction;
+use Filament\Actions\DetachBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Actions\ForceDeleteAction;
+use Filament\Actions\ForceDeleteBulkAction;
+use Filament\Actions\ReplicateAction;
+use Filament\Actions\RestoreAction;
+use Filament\Actions\RestoreBulkAction;
+use Filament\Tables\Columns\CheckboxColumn;
+use Filament\Tables\Columns\SelectColumn;
+use Filament\Tables\Columns\TextInputColumn;
+use Filament\Tables\Columns\ToggleColumn;
 use Closure;
 use Filament\Actions as PageActions;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -10,29 +31,29 @@ use Filament\Tables\Columns;
 
 class LogActions
 {
-    use Concerns\HasAssociations;
-    use Concerns\HasCreated;
-    use Concerns\HasDeleted;
-    use Concerns\HasRestored;
-    use Concerns\HasUpdated;
+    use HasAssociations;
+    use HasCreated;
+    use HasDeleted;
+    use HasRestored;
+    use HasUpdated;
 
     public array $targets = [
         // * ----------- Table Actions -----------
         // TableActions\AssociateAction::class => 'associate',
-        TableActions\AttachAction::class => 'attach',
-        TableActions\CreateAction::class => 'create',
-        TableActions\DeleteAction::class => 'delete',
-        TableActions\DeleteBulkAction::class => 'deleteBulk',
-        TableActions\DetachAction::class => 'detach',
-        TableActions\DetachBulkAction::class => 'detachBulk',
+        AttachAction::class => 'attach',
+        CreateAction::class => 'create',
+        DeleteAction::class => 'delete',
+        DeleteBulkAction::class => 'deleteBulk',
+        DetachAction::class => 'detach',
+        DetachBulkAction::class => 'detachBulk',
         // TableActions\DissociateAction::class => 'dissociate',
         // TableActions\DissociateBulkAction::class => 'dissociateBulk',
-        TableActions\EditAction::class => 'edit',
-        TableActions\ForceDeleteAction::class => 'delete',
-        TableActions\ForceDeleteBulkAction::class => 'deleteBulk',
-        TableActions\ReplicateAction::class => 'create',
-        TableActions\RestoreAction::class => 'restore',
-        TableActions\RestoreBulkAction::class => 'restoreBulk',
+        EditAction::class => 'edit',
+        ForceDeleteAction::class => 'delete',
+        ForceDeleteBulkAction::class => 'deleteBulk',
+        ReplicateAction::class => 'create',
+        RestoreAction::class => 'restore',
+        RestoreBulkAction::class => 'restoreBulk',
 
         // * ----------- Page Actions -----------
         PageActions\CreateAction::class => 'create',
@@ -43,10 +64,10 @@ class LogActions
         PageActions\RestoreAction::class => 'restore',
 
         // * ----------- Editable Columns -----------
-        Columns\CheckboxColumn::class => 'editableColumn',
-        Columns\SelectColumn::class => 'editableColumn',
-        Columns\TextInputColumn::class => 'editableColumn',
-        Columns\ToggleColumn::class => 'editableColumn',
+        CheckboxColumn::class => 'editableColumn',
+        SelectColumn::class => 'editableColumn',
+        TextInputColumn::class => 'editableColumn',
+        ToggleColumn::class => 'editableColumn',
     ];
 
     public function configure(): void

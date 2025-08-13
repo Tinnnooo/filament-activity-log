@@ -2,9 +2,13 @@
 
 namespace Noxo\FilamentActivityLog\ResourceLogger;
 
+use Noxo\FilamentActivityLog\ResourceLogger\Concerns\HasFields;
+use Noxo\FilamentActivityLog\ResourceLogger\Concerns\HasRelationLoader;
+use Noxo\FilamentActivityLog\ResourceLogger\Concerns\HasRelationManagers;
+
 class ResourceLogger
 {
-    use Concerns\HasFields;
-    use Concerns\HasRelationLoader;
-    use Concerns\HasRelationManagers;
+    use HasFields;
+    use HasRelationLoader;
+    use HasRelationManagers;
 }

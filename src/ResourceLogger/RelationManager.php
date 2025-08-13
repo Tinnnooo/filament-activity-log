@@ -2,14 +2,18 @@
 
 namespace Noxo\FilamentActivityLog\ResourceLogger;
 
+use Noxo\FilamentActivityLog\ResourceLogger\Concerns\HasFields;
+use Noxo\FilamentActivityLog\ResourceLogger\Concerns\HasLabel;
+use Noxo\FilamentActivityLog\ResourceLogger\Concerns\HasName;
+use Noxo\FilamentActivityLog\ResourceLogger\Concerns\HasRelationLoader;
 use DragonCode\Support\Concerns\Makeable;
 
 class RelationManager
 {
-    use Concerns\HasFields;
-    use Concerns\HasLabel;
-    use Concerns\HasName;
-    use Concerns\HasRelationLoader;
+    use HasFields;
+    use HasLabel;
+    use HasName;
+    use HasRelationLoader;
     use Makeable;
 
     public function __construct(string $name)

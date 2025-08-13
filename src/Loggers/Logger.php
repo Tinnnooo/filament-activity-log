@@ -2,18 +2,24 @@
 
 namespace Noxo\FilamentActivityLog\Loggers;
 
+use Noxo\FilamentActivityLog\Loggers\Concerns\HasCaused;
+use Noxo\FilamentActivityLog\Loggers\Concerns\HasEvents;
+use Noxo\FilamentActivityLog\Loggers\Concerns\HasLabel;
+use Noxo\FilamentActivityLog\Loggers\Concerns\HasRelationManager;
+use Noxo\FilamentActivityLog\Loggers\Concerns\HasResourceLogger;
+use Noxo\FilamentActivityLog\Loggers\Concerns\Loggable;
 use Closure;
 use DragonCode\Support\Concerns\Makeable;
 use Illuminate\Database\Eloquent\Model;
 
 class Logger
 {
-    use Concerns\HasCaused;
-    use Concerns\HasEvents;
-    use Concerns\HasLabel;
-    use Concerns\HasRelationManager;
-    use Concerns\HasResourceLogger;
-    use Concerns\Loggable;
+    use HasCaused;
+    use HasEvents;
+    use HasLabel;
+    use HasRelationManager;
+    use HasResourceLogger;
+    use Loggable;
     use Makeable;
 
     public static bool $disabled = false;

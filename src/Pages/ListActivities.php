@@ -2,8 +2,12 @@
 
 namespace Noxo\FilamentActivityLog\Pages;
 
+use Noxo\FilamentActivityLog\Pages\Concerns\CanCollapse;
+use Noxo\FilamentActivityLog\Pages\Concerns\HasListFilters;
+use Noxo\FilamentActivityLog\Pages\Concerns\HasLogger;
+use Noxo\FilamentActivityLog\Pages\Concerns\UrlHandling;
+use Filament\Schemas\Components\Section;
 use BackedEnum;
-use Filament\Forms\Components\Section;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
@@ -16,16 +20,16 @@ use Spatie\Activitylog\Models\Activity;
 abstract class ListActivities extends Page implements HasForms
 {
     use CanPaginateRecords;
-    use Concerns\CanCollapse;
-    use Concerns\HasListFilters;
-    use Concerns\HasLogger;
-    use Concerns\UrlHandling;
+    use CanCollapse;
+    use HasListFilters;
+    use HasLogger;
+    use UrlHandling;
     use InteractsWithForms;
     use WithPagination;
 
     protected string $view = 'filament-activity-log::list.index';
 
-    protected static string | BackedEnum | null $navigationIcon = 'heroicon-s-finger-print';
+    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-s-finger-print';
 
     public function getTitle(): string
     {

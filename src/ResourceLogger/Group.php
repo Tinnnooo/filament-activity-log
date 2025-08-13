@@ -2,6 +2,8 @@
 
 namespace Noxo\FilamentActivityLog\ResourceLogger;
 
+use Noxo\FilamentActivityLog\ResourceLogger\Concerns\HasFields;
+use Noxo\FilamentActivityLog\ResourceLogger\Concerns\HasLabel;
 use DragonCode\Support\Concerns\Makeable;
 
 /**
@@ -9,8 +11,8 @@ use DragonCode\Support\Concerns\Makeable;
  */
 class Group
 {
-    use Concerns\HasFields;
-    use Concerns\HasLabel;
+    use HasFields;
+    use HasLabel;
     use Makeable;
 
     public function __construct(array $fields)

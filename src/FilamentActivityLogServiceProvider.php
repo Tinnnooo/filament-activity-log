@@ -2,6 +2,9 @@
 
 namespace Noxo\FilamentActivityLog;
 
+use Noxo\FilamentActivityLog\Commands\MakeLoggerCommand;
+use Noxo\FilamentActivityLog\Loggers\Loggers;
+use Noxo\FilamentActivityLog\Extensions\LogActions;
 use Filament\Support\Assets\Css;
 use Filament\Support\Assets\Js;
 use Filament\Support\Facades\FilamentAsset;
@@ -17,7 +20,7 @@ class FilamentActivityLogServiceProvider extends PackageServiceProvider
         $package
             ->name(static::$name)
             ->hasCommands([
-                Commands\MakeLoggerCommand::class,
+                MakeLoggerCommand::class,
             ])
             ->hasConfigFile()
             ->hasTranslations()
@@ -31,8 +34,8 @@ class FilamentActivityLogServiceProvider extends PackageServiceProvider
 
     public function bootingPackage()
     {
-        Loggers\Loggers::discover();
-        app(Extensions\LogActions::class)->configure();
+        Loggers::discover();
+        app(LogActions::class)->configure();
 
         FilamentAsset::register([
             Css::make('filament-activity-log-styles', __DIR__ . '/../resources/dist/filament-activity-log.css'),

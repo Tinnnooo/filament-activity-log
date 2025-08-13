@@ -2,9 +2,11 @@
 
 namespace Noxo\FilamentActivityLog\Extensions;
 
+use Noxo\FilamentActivityLog\Extensions\Concerns\HasUpdated;
+
 trait LogEditRecord
 {
-    use Concerns\HasUpdated;
+    use HasUpdated;
 
     public function beforeValidate()
     {

@@ -2,9 +2,11 @@
 
 namespace Noxo\FilamentActivityLog\Extensions;
 
+use Noxo\FilamentActivityLog\Extensions\Concerns\HasCreated;
+
 trait LogCreateRecord
 {
-    use Concerns\HasCreated;
+    use HasCreated;
 
     public function afterCreate()
     {
