@@ -2,7 +2,7 @@
 
 <div
     @class([
-        'p-2 space-y-2 bg-white rounded-xl shadow group',
+        'p-2 bg-white rounded-xl shadow group',
         'dark:border-gray-600 dark:bg-gray-900',
     ])
     x-data="{
@@ -25,15 +25,15 @@
         $inlineField = $hasOld && $isInlineSingle ? Helper::resolveInlineField($logger, $attributes, $old) : null;
     @endphp
 
-    {{ view('filament-activity-log::list.header', compact('activity', 'hasChanges', 'logger', 'inlineField')) }}
+    {{ view('filament-activity-log::list.header', compact('activity', 'hasChanges', 'logger', 'inlineField', 'timezone')) }}
 
     @if (empty($inlineField) && $hasChanges)
         @php
             $table = !$hasOld ? 'simple' : 'default';
         @endphp
 
-        {{-- <div x-show="!isCollapsed">
-            {{ view('filament-activity-log::list.tables.' . $table, compact('changes', 'logger')) }}
-        </div> --}}
+        <div x-show="!isCollapsed" class="mt-2">
+            {{ view('filament-activity-log::list.tables.' . $table, compact('changes', 'logger', 'timezone')) }}
+        </div>
     @endif
 </div>

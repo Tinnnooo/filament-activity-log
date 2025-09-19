@@ -44,7 +44,7 @@
         <div class="flex flex-col text-left">
             <span class="font-semibold dark:text-gray-300">{{ $activity->causer?->name }}</span>
             <span class="text-xs text-gray-700 dark:text-gray-200">
-                {{ $activity->created_at->translatedFormat(__('filament-activity-log::activities.time_format')) }}
+                {{ $activity->created_at->setTimezone($timezone)->translatedFormat(__('filament-activity-log::activities.time_format')) }}
             </span>
         </div>
     </div>
@@ -107,7 +107,7 @@
         @if ($hasChanges && $this->isCollapsible)
             <x-filament::icon
                 icon="heroicon-m-chevron-up"
-                class="h-6 w-6 text-gray-500 dark:text-gray-400 transition"
+                class="w-6 h-6 text-gray-500 transition dark:text-gray-400"
                 x-bind:class="{ '-rotate-180': !isCollapsed }"
             />
         @endif

@@ -1,17 +1,12 @@
-<x-filament-tables::table class="w-full overflow-hidden text-sm table-fixed!">
+<x-filament-activity-log::table.index class="w-full overflow-hidden text-sm table-fixed!">
     <x-slot:header>
-        <x-filament-tables::header-cell
-            width="20%"
-            class="py-2!"
-        >
+        <x-filament-activity-log::table.header-cell width="20%">
             @lang('filament-activity-log::activities.table.field')
-        </x-filament-tables::header-cell>
-        <x-filament-tables::header-cell
-            width="80%"
-            class="py-2!"
-        >
+        </x-filament-activity-log::table.header-cell>
+
+        <x-filament-activity-log::table.header-cell width="80%">
             @lang('filament-activity-log::activities.table.value')
-        </x-filament-tables::header-cell>
+        </x-filament-activity-log::table.header-cell>
     </x-slot:header>
 
     @foreach ($changes['attributes'] as $key => $value)
@@ -22,14 +17,14 @@
             }
         @endphp
 
-        <x-filament-tables::row>
-            <x-filament-tables::cell class="px-4 py-2 align-top sm:first-of-type:ps-6 sm:last-of-type:pe-6">
+        <x-filament-activity-log::table.row>
+            <x-filament-activity-log::table.cell class="px-4 py-2 align-top sm:first-of-type:ps-6 sm:last-of-type:pe-6">
                 {{ $field->getLabel() }}
-            </x-filament-tables::cell>
+            </x-filament-activity-log::table.cell>
 
-            <x-filament-tables::cell class="px-4 py-2 align-top overflow-x-auto">
+            <x-filament-activity-log::table.cell class="px-4 py-2 align-top sm:first-of-type:ps-6 sm:last-of-type:pe-6">
                 {{ $field->display($value) }}
-            </x-filament-tables::cell>
-        </x-filament-tables::row>
+            </x-filament-activity-log::table.cell>
+        </x-filament-activity-log::table.row>
     @endforeach
-</x-filament-tables::table>
+</x-filament-activity-log::table.index>

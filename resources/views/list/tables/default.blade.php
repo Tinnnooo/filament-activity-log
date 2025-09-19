@@ -1,23 +1,23 @@
-<x-filament-tables::table class="w-full overflow-hidden text-sm table-fixed!">
+<x-filament-activity-log::table.index class="w-full overflow-hidden text-sm table-fixed!">
     <x-slot:header>
-        <x-filament-tables::header-cell
+        <x-filament-activity-log::table.header-cell
             width="20%"
             class="py-2!"
         >
             @lang('filament-activity-log::activities.table.field')
-        </x-filament-tables::header-cell>
-        <x-filament-tables::header-cell
+        </x-filament-activity-log::table.header-cell>
+        <x-filament-activity-log::table.header-cell
             width="40%"
             class="py-2!"
         >
             @lang('filament-activity-log::activities.table.old')
-        </x-filament-tables::header-cell>
-        <x-filament-tables::header-cell
+        </x-filament-activity-log::table.header-cell>
+        <x-filament-activity-log::table.header-cell
             width="40%"
             class="py-2!"
         >
             @lang('filament-activity-log::activities.table.new')
-        </x-filament-tables::header-cell>
+        </x-filament-activity-log::table.header-cell>
     </x-slot:header>
 
     @foreach ($changes['attributes'] as $key => $newValue)
@@ -35,13 +35,13 @@
             }
         @endphp
 
-        <x-filament-tables::row>
-            <x-filament-tables::cell class="px-4 py-2 align-top sm:first-of-type:ps-6 sm:last-of-type:pe-6">
+        <x-filament-activity-log::table.row>
+            <x-filament-activity-log::table.cell class="px-4 py-2 align-top sm:first-of-type:ps-6 sm:last-of-type:pe-6">
                 {{ $field->getLabel() }}
-            </x-filament-tables::cell>
+            </x-filament-activity-log::table.cell>
 
             @if ($field->is('difference'))
-                <x-filament-tables::cell
+                <x-filament-activity-log::table.cell
                     colspan="2"
                     class="px-4 py-2 align-top break-all whitespace-normal!"
                 >
@@ -50,17 +50,17 @@
                         'oldValue' => $field->display($oldValue, raw: true),
                         'newValue' => $field->display($newValue, raw: true),
                     ]) }}
-                </x-filament-tables::cell>
+                </x-filament-activity-log::table.cell>
             @else
-                <x-filament-tables::cell class="px-4 py-2 align-top overflow-x-auto">
+                <x-filament-activity-log::table.cell class="px-4 py-2 overflow-x-auto align-top">
                     {{ $field->display($oldValue) }}
-                </x-filament-tables::cell>
+                </x-filament-activity-log::table.cell>
 
-                <x-filament-tables::cell class="px-4 py-2 align-top overflow-x-auto">
+                <x-filament-activity-log::table.cell class="px-4 py-2 overflow-x-auto align-top">
                     {{ $field->display($newValue) }}
-                </x-filament-tables::cell>
+                </x-filament-activity-log::table.cell>
             @endif
 
-        </x-filament-tables::row>
+        </x-filament-activity-log::table.row>
     @endforeach
-</x-filament-tables::table>
+</x-filament-activity-log::table.index>

@@ -58,7 +58,7 @@
 
             @forelse ($activities as $activity)
                 @php
-                    $date = $activity->created_at->translatedFormat(__('filament-activity-log::activities.date_format'));
+                    $date = $activity->created_at->setTimezone($timezone)->translatedFormat(__('filament-activity-log::activities.date_format'));
 
                     /* @var \Noxo\FilamentActivityLog\Loggers\Logger $logger */
                     $logger = $this->getLogger($activity);
@@ -82,7 +82,7 @@
                     @endphp
                 @endif
 
-                {{ view('filament-activity-log::list.item', compact('activity', 'logger')) }}
+                {{ view('filament-activity-log::list.item', compact('activity', 'logger', 'timezone')) }}
             @empty
 
                 <div @class([
@@ -96,7 +96,7 @@
             @if ($activities->isNotEmpty())
                 <x-filament::pagination
                     :page-options="$this->getTableRecordsPerPageSelectOptions()"
-                    :paginator="$this->getActivities()"
+                    :paginator="$activities"
                     class="px-3 py-3 sm:px-6"
                 />
             @endif
