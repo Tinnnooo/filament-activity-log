@@ -2,29 +2,29 @@
 
 namespace Noxo\FilamentActivityLog\Pages;
 
+use Filament\Pages\Page;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Concerns\InteractsWithSchemas;
+use Filament\Schemas\Contracts\HasSchemas;
+use Filament\Schemas\Schema;
+use Livewire\WithPagination;
 use Noxo\FilamentActivityLog\Pages\Concerns\CanCollapse;
+use Noxo\FilamentActivityLog\Pages\Concerns\CanPaginateRecords;
 use Noxo\FilamentActivityLog\Pages\Concerns\HasListFilters;
 use Noxo\FilamentActivityLog\Pages\Concerns\HasLogger;
+use Noxo\FilamentActivityLog\Pages\Concerns\HasTimezone;
 use Noxo\FilamentActivityLog\Pages\Concerns\UrlHandling;
-use Filament\Schemas\Components\Section;
-use BackedEnum;
-use Filament\Forms\Concerns\InteractsWithForms;
-use Filament\Forms\Contracts\HasForms;
-use Filament\Forms\Form;
-use Filament\Pages\Page;
-use Filament\Schemas\Schema;
-use Filament\Tables\Concerns\CanPaginateRecords;
-use Livewire\WithPagination;
 use Spatie\Activitylog\Models\Activity;
 
-abstract class ListActivities extends Page implements HasForms
+abstract class ListActivities extends Page implements HasSchemas
 {
-    use CanPaginateRecords;
     use CanCollapse;
+    use CanPaginateRecords;
     use HasListFilters;
     use HasLogger;
+    use HasTimezone;
+    use InteractsWithSchemas;
     use UrlHandling;
-    use InteractsWithForms;
     use WithPagination;
 
     protected string $view = 'filament-activity-log::list.index';
@@ -71,11 +71,6 @@ abstract class ListActivities extends Page implements HasForms
         return $this->paginateTableQuery(
             $this->applyFilters($activityModel::with('causer')->latest())
         );
-    }
-
-    protected function getIdentifiedTableQueryStringPropertyNameFor(string $property): string
-    {
-        return $property;
     }
 
     protected function getDefaultTableRecordsPerPageSelectOption(): int

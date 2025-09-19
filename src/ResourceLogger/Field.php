@@ -2,6 +2,9 @@
 
 namespace Noxo\FilamentActivityLog\ResourceLogger;
 
+use DragonCode\Support\Concerns\Makeable;
+use Filament\Forms\Components\Concerns\CanAllowHtml;
+use Filament\Support\Concerns\EvaluatesClosures;
 use Noxo\FilamentActivityLog\ResourceLogger\Concerns\CanDisplay;
 use Noxo\FilamentActivityLog\ResourceLogger\Concerns\CanStore;
 use Noxo\FilamentActivityLog\ResourceLogger\Concerns\FieldResolver;
@@ -22,15 +25,18 @@ use Noxo\FilamentActivityLog\ResourceLogger\Concerns\Types\Media;
 use Noxo\FilamentActivityLog\ResourceLogger\Concerns\Types\Money;
 use Noxo\FilamentActivityLog\ResourceLogger\Concerns\Types\Relation;
 use Noxo\FilamentActivityLog\ResourceLogger\Concerns\Types\Table;
-use DragonCode\Support\Concerns\Makeable;
-use Filament\Forms\Components\Concerns\CanAllowHtml;
-use Filament\Support\Concerns\EvaluatesClosures;
 
 class Field
 {
+    use Badge;
+    use Boolean;
     use CanAllowHtml;
     use CanDisplay;
     use CanStore;
+    use Date;
+    use Difference;
+    use Enum;
+    use EvaluatesClosures;
     use FieldResolver;
     use HasLabel;
     use HasName;
@@ -38,19 +44,13 @@ class Field
     use HasTemplate;
     use HasType;
     use HasView;
-    use Badge;
-    use Boolean;
-    use Date;
-    use Difference;
-    use Enum;
     use Inline;
     use KeyValue;
+    use Makeable;
     use Media;
     use Money;
     use Relation;
     use Table;
-    use EvaluatesClosures;
-    use Makeable;
 
     public function __construct(string $name, ?string $type = null)
     {

@@ -32,8 +32,8 @@
             $table = !$hasOld ? 'simple' : 'default';
         @endphp
 
-        <div x-show="!isCollapsed">
+        {{-- <div x-show="!isCollapsed">
             {{ view('filament-activity-log::list.tables.' . $table, compact('changes', 'logger')) }}
-        </div>
+        </div> --}}
     @endif
 </div>

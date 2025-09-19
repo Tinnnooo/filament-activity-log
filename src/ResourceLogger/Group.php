@@ -2,9 +2,9 @@
 
 namespace Noxo\FilamentActivityLog\ResourceLogger;
 
+use DragonCode\Support\Concerns\Makeable;
 use Noxo\FilamentActivityLog\ResourceLogger\Concerns\HasFields;
 use Noxo\FilamentActivityLog\ResourceLogger\Concerns\HasLabel;
-use DragonCode\Support\Concerns\Makeable;
 
 /**
  * @todo Group not working yet..

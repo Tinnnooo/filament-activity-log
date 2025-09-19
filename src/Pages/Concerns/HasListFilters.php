@@ -2,14 +2,13 @@
 
 namespace Noxo\FilamentActivityLog\Pages\Concerns;
 
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\Relation;
 use Carbon\Carbon;
 use Exception;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Illuminate\Database\Eloquent;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\Blade;
 use Malzariey\FilamentDaterangepickerFilter\Fields\DateRangePicker;
 use Noxo\FilamentActivityLog\Loggers\Loggers;

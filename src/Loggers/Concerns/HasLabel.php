@@ -2,8 +2,8 @@
 
 namespace Noxo\FilamentActivityLog\Loggers\Concerns;
 
-use Noxo\FilamentActivityLog\Loggers\Logger;
 use Illuminate\Contracts\Support\Htmlable;
+use Noxo\FilamentActivityLog\Loggers\Logger;
 
 trait HasLabel
 {

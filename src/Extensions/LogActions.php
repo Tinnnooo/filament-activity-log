@@ -2,11 +2,8 @@
 
 namespace Noxo\FilamentActivityLog\Extensions;
 
-use Noxo\FilamentActivityLog\Extensions\Concerns\HasAssociations;
-use Noxo\FilamentActivityLog\Extensions\Concerns\HasCreated;
-use Noxo\FilamentActivityLog\Extensions\Concerns\HasDeleted;
-use Noxo\FilamentActivityLog\Extensions\Concerns\HasRestored;
-use Noxo\FilamentActivityLog\Extensions\Concerns\HasUpdated;
+use Closure;
+use Filament\Actions as PageActions;
 use Filament\Actions\AttachAction;
 use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteAction;
@@ -19,15 +16,18 @@ use Filament\Actions\ForceDeleteBulkAction;
 use Filament\Actions\ReplicateAction;
 use Filament\Actions\RestoreAction;
 use Filament\Actions\RestoreBulkAction;
+use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Tables\Actions as TableActions;
+use Filament\Tables\Columns;
 use Filament\Tables\Columns\CheckboxColumn;
 use Filament\Tables\Columns\SelectColumn;
 use Filament\Tables\Columns\TextInputColumn;
 use Filament\Tables\Columns\ToggleColumn;
-use Closure;
-use Filament\Actions as PageActions;
-use Filament\Resources\RelationManagers\RelationManager;
-use Filament\Tables\Actions as TableActions;
-use Filament\Tables\Columns;
+use Noxo\FilamentActivityLog\Extensions\Concerns\HasAssociations;
+use Noxo\FilamentActivityLog\Extensions\Concerns\HasCreated;
+use Noxo\FilamentActivityLog\Extensions\Concerns\HasDeleted;
+use Noxo\FilamentActivityLog\Extensions\Concerns\HasRestored;
+use Noxo\FilamentActivityLog\Extensions\Concerns\HasUpdated;
 
 class LogActions
 {

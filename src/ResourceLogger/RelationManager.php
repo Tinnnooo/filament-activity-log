@@ -2,11 +2,11 @@
 
 namespace Noxo\FilamentActivityLog\ResourceLogger;
 
+use DragonCode\Support\Concerns\Makeable;
 use Noxo\FilamentActivityLog\ResourceLogger\Concerns\HasFields;
 use Noxo\FilamentActivityLog\ResourceLogger\Concerns\HasLabel;
 use Noxo\FilamentActivityLog\ResourceLogger\Concerns\HasName;
 use Noxo\FilamentActivityLog\ResourceLogger\Concerns\HasRelationLoader;
-use DragonCode\Support\Concerns\Makeable;
 
 class RelationManager
 {

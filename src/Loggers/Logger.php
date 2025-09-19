@@ -2,15 +2,15 @@
 
 namespace Noxo\FilamentActivityLog\Loggers;
 
+use Closure;
+use DragonCode\Support\Concerns\Makeable;
+use Illuminate\Database\Eloquent\Model;
 use Noxo\FilamentActivityLog\Loggers\Concerns\HasCaused;
 use Noxo\FilamentActivityLog\Loggers\Concerns\HasEvents;
 use Noxo\FilamentActivityLog\Loggers\Concerns\HasLabel;
 use Noxo\FilamentActivityLog\Loggers\Concerns\HasRelationManager;
 use Noxo\FilamentActivityLog\Loggers\Concerns\HasResourceLogger;
 use Noxo\FilamentActivityLog\Loggers\Concerns\Loggable;
-use Closure;
-use DragonCode\Support\Concerns\Makeable;
-use Illuminate\Database\Eloquent\Model;
 
 class Logger
 {
