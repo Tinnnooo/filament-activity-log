@@ -5,20 +5,20 @@
     @endphp
 
     <div class="w-full overflow-x-auto border border-gray-200 dark:border-white/5 rounded-lg">
-        <x-filament-tables::table>
+        <x-filament-activity-log::table.index>
             <x-slot:header>
                 @foreach ($fields as $field)
-                    <x-filament-tables::header-cell class="p-2!">
+                    <x-filament-activity-log::table.header-cell class="p-2!">
                         {{ $field->getLabel() }}
-                    </x-filament-tables::header-cell>
+                    </x-filament-activity-log::table.header-cell>
                 @endforeach
             </x-slot:header>
 
 
             @foreach ($value as $item)
-                <x-filament-tables::row>
+                <x-filament-activity-log::table.row>
                     @foreach ($fields as $field)
-                        <x-filament-tables::cell class="p-2 align-top">
+                        <x-filament-activity-log::table.cell class="p-2 align-top">
                             @php
                                 $rawValue = $item[$field->name] ?? data_get($item, $field->name);
                                 $dispayValue = $field->display($rawValue);
@@ -29,10 +29,10 @@
                             @else
                                 {{ $dispayValue }}
                             @endif
-                        </x-filament-tables::cell>
+                        </x-filament-activity-log::table.cell>
                     @endforeach
-                </x-filament-tables::row>
+                </x-filament-activity-log::table.row>
             @endforeach
-        </x-filament-tables::table>
+        </x-filament-activity-log::table.index>
     </div>
 @endif
