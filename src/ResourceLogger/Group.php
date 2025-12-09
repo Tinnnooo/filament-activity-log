@@ -1,10 +1,10 @@
 <?php
 
-namespace Noxo\FilamentActivityLog\ResourceLogger;
+namespace Noin\FilamentActivityLog\ResourceLogger;
 
 use DragonCode\Support\Concerns\Makeable;
-use Noxo\FilamentActivityLog\ResourceLogger\Concerns\HasFields;
-use Noxo\FilamentActivityLog\ResourceLogger\Concerns\HasLabel;
+use Noin\FilamentActivityLog\ResourceLogger\Concerns\HasFields;
+use Noin\FilamentActivityLog\ResourceLogger\Concerns\HasLabel;
 
 /**
  * @todo Group not working yet..

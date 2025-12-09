@@ -5,10 +5,10 @@ namespace {{ namespace }};
 use {{ modelNamespace }};
 use {{ resourceNamespace }}\{{ modelClass }}Resource;
 use Illuminate\Contracts\Support\Htmlable;
-use Noxo\FilamentActivityLog\Loggers\Logger;
-use Noxo\FilamentActivityLog\ResourceLogger\Field;
-use Noxo\FilamentActivityLog\ResourceLogger\RelationManager;
-use Noxo\FilamentActivityLog\ResourceLogger\ResourceLogger;
+use Noin\FilamentActivityLog\Loggers\Logger;
+use Noin\FilamentActivityLog\ResourceLogger\Field;
+use Noin\FilamentActivityLog\ResourceLogger\RelationManager;
+use Noin\FilamentActivityLog\ResourceLogger\ResourceLogger;
 
 class {{ class }} extends Logger
 {

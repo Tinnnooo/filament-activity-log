@@ -1,6 +1,6 @@
 <?php
 
-namespace Noxo\FilamentActivityLog\Pages\Concerns;
+namespace Noin\FilamentActivityLog\Pages\Concerns;
 
 use Illuminate\Contracts\Pagination\CursorPaginator;
 use Illuminate\Contracts\Pagination\Paginator;

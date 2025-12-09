@@ -1,6 +1,6 @@
 <?php
 
-namespace Noxo\FilamentActivityLog\Loggers\Concerns;
+namespace Noin\FilamentActivityLog\Loggers\Concerns;
 
 use Illuminate\Database\Eloquent\Model;
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace Noxo\FilamentActivityLog\Loggers\Concerns;
+namespace Noin\FilamentActivityLog\Loggers\Concerns;
 
-use Noxo\FilamentActivityLog\ResourceLogger\Field;
-use Noxo\FilamentActivityLog\ResourceLogger\ResourceLogger;
+use Noin\FilamentActivityLog\ResourceLogger\Field;
+use Noin\FilamentActivityLog\ResourceLogger\ResourceLogger;
 use Spatie\Activitylog\Models\Activity;
 
 trait HasResourceLogger

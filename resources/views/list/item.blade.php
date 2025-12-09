@@ -1,4 +1,4 @@
-@use(Noxo\FilamentActivityLog\Services\Helper)
+@use(Noin\FilamentActivityLog\Services\Helper)
 
 <div
     @class([

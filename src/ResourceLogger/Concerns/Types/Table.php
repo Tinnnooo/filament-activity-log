@@ -1,9 +1,9 @@
 <?php
 
-namespace Noxo\FilamentActivityLog\ResourceLogger\Concerns\Types;
+namespace Noin\FilamentActivityLog\ResourceLogger\Concerns\Types;
 
 use Closure;
-use Noxo\FilamentActivityLog\ResourceLogger\Types\TableField;
+use Noin\FilamentActivityLog\ResourceLogger\Types\TableField;
 
 trait Table
 {
@@ -25,8 +25,8 @@ trait Table
         $this->resolveStateUsing(function ($record) use ($resolveRecords) {
             $records = collect(
                 is_null($resolveRecords)
-                ? data_get($record, $this->name)
-                : $resolveRecords($record)
+                    ? data_get($record, $this->name)
+                    : $resolveRecords($record)
             );
 
             $fields = collect($this->table->getFields());

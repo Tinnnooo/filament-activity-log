@@ -1,30 +1,30 @@
 <?php
 
-namespace Noxo\FilamentActivityLog\ResourceLogger;
+namespace Noin\FilamentActivityLog\ResourceLogger;
 
 use DragonCode\Support\Concerns\Makeable;
 use Filament\Forms\Components\Concerns\CanAllowHtml;
 use Filament\Support\Concerns\EvaluatesClosures;
-use Noxo\FilamentActivityLog\ResourceLogger\Concerns\CanDisplay;
-use Noxo\FilamentActivityLog\ResourceLogger\Concerns\CanStore;
-use Noxo\FilamentActivityLog\ResourceLogger\Concerns\FieldResolver;
-use Noxo\FilamentActivityLog\ResourceLogger\Concerns\HasLabel;
-use Noxo\FilamentActivityLog\ResourceLogger\Concerns\HasName;
-use Noxo\FilamentActivityLog\ResourceLogger\Concerns\HasState;
-use Noxo\FilamentActivityLog\ResourceLogger\Concerns\HasTemplate;
-use Noxo\FilamentActivityLog\ResourceLogger\Concerns\HasType;
-use Noxo\FilamentActivityLog\ResourceLogger\Concerns\HasView;
-use Noxo\FilamentActivityLog\ResourceLogger\Concerns\Types\Badge;
-use Noxo\FilamentActivityLog\ResourceLogger\Concerns\Types\Boolean;
-use Noxo\FilamentActivityLog\ResourceLogger\Concerns\Types\Date;
-use Noxo\FilamentActivityLog\ResourceLogger\Concerns\Types\Difference;
-use Noxo\FilamentActivityLog\ResourceLogger\Concerns\Types\Enum;
-use Noxo\FilamentActivityLog\ResourceLogger\Concerns\Types\Inline;
-use Noxo\FilamentActivityLog\ResourceLogger\Concerns\Types\KeyValue;
-use Noxo\FilamentActivityLog\ResourceLogger\Concerns\Types\Media;
-use Noxo\FilamentActivityLog\ResourceLogger\Concerns\Types\Money;
-use Noxo\FilamentActivityLog\ResourceLogger\Concerns\Types\Relation;
-use Noxo\FilamentActivityLog\ResourceLogger\Concerns\Types\Table;
+use Noin\FilamentActivityLog\ResourceLogger\Concerns\CanDisplay;
+use Noin\FilamentActivityLog\ResourceLogger\Concerns\CanStore;
+use Noin\FilamentActivityLog\ResourceLogger\Concerns\FieldResolver;
+use Noin\FilamentActivityLog\ResourceLogger\Concerns\HasLabel;
+use Noin\FilamentActivityLog\ResourceLogger\Concerns\HasName;
+use Noin\FilamentActivityLog\ResourceLogger\Concerns\HasState;
+use Noin\FilamentActivityLog\ResourceLogger\Concerns\HasTemplate;
+use Noin\FilamentActivityLog\ResourceLogger\Concerns\HasType;
+use Noin\FilamentActivityLog\ResourceLogger\Concerns\HasView;
+use Noin\FilamentActivityLog\ResourceLogger\Concerns\Types\Badge;
+use Noin\FilamentActivityLog\ResourceLogger\Concerns\Types\Boolean;
+use Noin\FilamentActivityLog\ResourceLogger\Concerns\Types\Date;
+use Noin\FilamentActivityLog\ResourceLogger\Concerns\Types\Difference;
+use Noin\FilamentActivityLog\ResourceLogger\Concerns\Types\Enum;
+use Noin\FilamentActivityLog\ResourceLogger\Concerns\Types\Inline;
+use Noin\FilamentActivityLog\ResourceLogger\Concerns\Types\KeyValue;
+use Noin\FilamentActivityLog\ResourceLogger\Concerns\Types\Media;
+use Noin\FilamentActivityLog\ResourceLogger\Concerns\Types\Money;
+use Noin\FilamentActivityLog\ResourceLogger\Concerns\Types\Relation;
+use Noin\FilamentActivityLog\ResourceLogger\Concerns\Types\Table;
 
 class Field
 {

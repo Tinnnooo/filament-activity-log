@@ -1,9 +1,9 @@
 <?php
 
-namespace Noxo\FilamentActivityLog\Loggers\Concerns;
+namespace Noin\FilamentActivityLog\Loggers\Concerns;
 
 use Illuminate\Database\Eloquent\Model;
-use Noxo\FilamentActivityLog\ResourceLogger\RelationManager;
+use Noin\FilamentActivityLog\ResourceLogger\RelationManager;
 use Spatie\Activitylog\Models\Activity;
 
 trait HasRelationManager

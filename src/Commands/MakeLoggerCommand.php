@@ -1,6 +1,6 @@
 <?php
 
-namespace Noxo\FilamentActivityLog\Commands;
+namespace Noin\FilamentActivityLog\Commands;
 
 use Filament\Facades\Filament;
 use Filament\Panel;

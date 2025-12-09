@@ -60,7 +60,7 @@
                 @php
                     $date = $activity->created_at->setTimezone($timezone)->translatedFormat(__('filament-activity-log::activities.date_format'));
 
-                    /* @var \Noxo\FilamentActivityLog\Loggers\Logger $logger */
+                    /* @var \Noin\FilamentActivityLog\Loggers\Logger $logger */
                     $logger = $this->getLogger($activity);
                     if (!$logger) {
                         continue;

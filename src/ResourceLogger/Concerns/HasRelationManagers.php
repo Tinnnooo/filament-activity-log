@@ -1,9 +1,9 @@
 <?php
 
-namespace Noxo\FilamentActivityLog\ResourceLogger\Concerns;
+namespace Noin\FilamentActivityLog\ResourceLogger\Concerns;
 
 use Closure;
-use Noxo\FilamentActivityLog\ResourceLogger\RelationManager;
+use Noin\FilamentActivityLog\ResourceLogger\RelationManager;
 
 trait HasRelationManagers
 {

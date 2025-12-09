@@ -1,9 +1,9 @@
 <?php
 
-namespace Noxo\FilamentActivityLog\Pages\Concerns;
+namespace Noin\FilamentActivityLog\Pages\Concerns;
 
-use Noxo\FilamentActivityLog\Loggers\Logger;
-use Noxo\FilamentActivityLog\Services\Helper;
+use Noin\FilamentActivityLog\Loggers\Logger;
+use Noin\FilamentActivityLog\Services\Helper;
 use Spatie\Activitylog\Models\Activity;
 
 trait HasLogger
