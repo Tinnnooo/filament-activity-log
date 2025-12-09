@@ -1,11 +1,11 @@
 <?php
 
-namespace Noxo\FilamentActivityLog\Services;
+namespace Noin\FilamentActivityLog\Services;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
-use Noxo\FilamentActivityLog\Loggers\Logger;
-use Noxo\FilamentActivityLog\Loggers\Loggers;
+use Noin\FilamentActivityLog\Loggers\Logger;
+use Noin\FilamentActivityLog\Loggers\Loggers;
 use UnitEnum;
 
 final class Helper

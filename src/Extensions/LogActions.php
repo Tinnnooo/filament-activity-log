@@ -1,6 +1,6 @@
 <?php
 
-namespace Noxo\FilamentActivityLog\Extensions;
+namespace Noin\FilamentActivityLog\Extensions;
 
 use Closure;
 use Filament\Actions as PageActions;
@@ -23,11 +23,11 @@ use Filament\Tables\Columns\CheckboxColumn;
 use Filament\Tables\Columns\SelectColumn;
 use Filament\Tables\Columns\TextInputColumn;
 use Filament\Tables\Columns\ToggleColumn;
-use Noxo\FilamentActivityLog\Extensions\Concerns\HasAssociations;
-use Noxo\FilamentActivityLog\Extensions\Concerns\HasCreated;
-use Noxo\FilamentActivityLog\Extensions\Concerns\HasDeleted;
-use Noxo\FilamentActivityLog\Extensions\Concerns\HasRestored;
-use Noxo\FilamentActivityLog\Extensions\Concerns\HasUpdated;
+use Noin\FilamentActivityLog\Extensions\Concerns\HasAssociations;
+use Noin\FilamentActivityLog\Extensions\Concerns\HasCreated;
+use Noin\FilamentActivityLog\Extensions\Concerns\HasDeleted;
+use Noin\FilamentActivityLog\Extensions\Concerns\HasRestored;
+use Noin\FilamentActivityLog\Extensions\Concerns\HasUpdated;
 
 class LogActions
 {

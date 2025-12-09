@@ -1,6 +1,6 @@
 <?php
 
-namespace Noxo\FilamentActivityLog\Pages;
+namespace Noin\FilamentActivityLog\Pages;
 
 use Filament\Pages\Page;
 use Filament\Schemas\Components\Section;
@@ -8,12 +8,12 @@ use Filament\Schemas\Concerns\InteractsWithSchemas;
 use Filament\Schemas\Contracts\HasSchemas;
 use Filament\Schemas\Schema;
 use Livewire\WithPagination;
-use Noxo\FilamentActivityLog\Pages\Concerns\CanCollapse;
-use Noxo\FilamentActivityLog\Pages\Concerns\CanPaginateRecords;
-use Noxo\FilamentActivityLog\Pages\Concerns\HasListFilters;
-use Noxo\FilamentActivityLog\Pages\Concerns\HasLogger;
-use Noxo\FilamentActivityLog\Pages\Concerns\HasTimezone;
-use Noxo\FilamentActivityLog\Pages\Concerns\UrlHandling;
+use Noin\FilamentActivityLog\Pages\Concerns\CanCollapse;
+use Noin\FilamentActivityLog\Pages\Concerns\CanPaginateRecords;
+use Noin\FilamentActivityLog\Pages\Concerns\HasListFilters;
+use Noin\FilamentActivityLog\Pages\Concerns\HasLogger;
+use Noin\FilamentActivityLog\Pages\Concerns\HasTimezone;
+use Noin\FilamentActivityLog\Pages\Concerns\UrlHandling;
 use Spatie\Activitylog\Models\Activity;
 
 abstract class ListActivities extends Page implements HasSchemas

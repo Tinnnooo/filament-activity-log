@@ -1,8 +1,8 @@
 <?php
 
-namespace Noxo\FilamentActivityLog\Extensions\Concerns;
+namespace Noin\FilamentActivityLog\Extensions\Concerns;
 
-use Noxo\FilamentActivityLog\Services\Helper;
+use Noin\FilamentActivityLog\Services\Helper;
 
 trait HasDeleted
 {

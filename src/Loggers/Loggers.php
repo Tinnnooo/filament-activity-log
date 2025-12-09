@@ -1,6 +1,6 @@
 <?php
 
-namespace Noxo\FilamentActivityLog\Loggers;
+namespace Noin\FilamentActivityLog\Loggers;
 
 use Illuminate\Filesystem\Filesystem;
 use ReflectionClass;

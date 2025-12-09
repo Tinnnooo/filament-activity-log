@@ -1,6 +1,6 @@
 <?php
 
-namespace Noxo\FilamentActivityLog\Pages\Concerns;
+namespace Noin\FilamentActivityLog\Pages\Concerns;
 
 use Carbon\Carbon;
 use Exception;
@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\Blade;
 use Malzariey\FilamentDaterangepickerFilter\Fields\DateRangePicker;
-use Noxo\FilamentActivityLog\Loggers\Loggers;
+use Noin\FilamentActivityLog\Loggers\Loggers;
 use Spatie\Activitylog\Models\Activity;
 
 trait HasListFilters
@@ -188,7 +188,6 @@ trait HasListFilters
             ->label(__('filament-activity-log::activities.filters.subject_id'))
             ->visible(fn (callable $get) => $get('subject_type'))
             ->numeric();
-
     }
 
     protected function getEventField()

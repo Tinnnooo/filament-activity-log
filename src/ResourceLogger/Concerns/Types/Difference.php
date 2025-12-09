@@ -1,6 +1,6 @@
 <?php
 
-namespace Noxo\FilamentActivityLog\ResourceLogger\Concerns\Types;
+namespace Noin\FilamentActivityLog\ResourceLogger\Concerns\Types;
 
 trait Difference
 {

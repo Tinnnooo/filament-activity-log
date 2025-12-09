@@ -1,13 +1,13 @@
 <?php
 
-namespace Noxo\FilamentActivityLog;
+namespace Noin\FilamentActivityLog;
 
 use Filament\Support\Assets\Css;
 use Filament\Support\Assets\Js;
 use Filament\Support\Facades\FilamentAsset;
-use Noxo\FilamentActivityLog\Commands\MakeLoggerCommand;
-use Noxo\FilamentActivityLog\Extensions\LogActions;
-use Noxo\FilamentActivityLog\Loggers\Loggers;
+use Noin\FilamentActivityLog\Commands\MakeLoggerCommand;
+use Noin\FilamentActivityLog\Extensions\LogActions;
+use Noin\FilamentActivityLog\Loggers\Loggers;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -29,7 +29,7 @@ class FilamentActivityLogServiceProvider extends PackageServiceProvider
 
     public function shortName(): string
     {
-        return 'noxo/' . self::$name;
+        return 'noin/' . self::$name;
     }
 
     public function bootingPackage()

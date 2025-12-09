@@ -1,16 +1,16 @@
 <?php
 
-namespace Noxo\FilamentActivityLog\Loggers;
+namespace Noin\FilamentActivityLog\Loggers;
 
 use Closure;
 use DragonCode\Support\Concerns\Makeable;
 use Illuminate\Database\Eloquent\Model;
-use Noxo\FilamentActivityLog\Loggers\Concerns\HasCaused;
-use Noxo\FilamentActivityLog\Loggers\Concerns\HasEvents;
-use Noxo\FilamentActivityLog\Loggers\Concerns\HasLabel;
-use Noxo\FilamentActivityLog\Loggers\Concerns\HasRelationManager;
-use Noxo\FilamentActivityLog\Loggers\Concerns\HasResourceLogger;
-use Noxo\FilamentActivityLog\Loggers\Concerns\Loggable;
+use Noin\FilamentActivityLog\Loggers\Concerns\HasCaused;
+use Noin\FilamentActivityLog\Loggers\Concerns\HasEvents;
+use Noin\FilamentActivityLog\Loggers\Concerns\HasLabel;
+use Noin\FilamentActivityLog\Loggers\Concerns\HasRelationManager;
+use Noin\FilamentActivityLog\Loggers\Concerns\HasResourceLogger;
+use Noin\FilamentActivityLog\Loggers\Concerns\Loggable;
 
 class Logger
 {

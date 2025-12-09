@@ -1,6 +1,6 @@
 <?php
 
-use Noxo\FilamentActivityLog\ResourceLogger\Types\BooleanEnum;
+use Noin\FilamentActivityLog\ResourceLogger\Types\BooleanEnum;
 
 return [
     'loggers' => [

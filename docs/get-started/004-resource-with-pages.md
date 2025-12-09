@@ -16,7 +16,7 @@ When your Filament resource uses separate pages for creating and editing records
 To enable activity logging when creating records in Filament, you should use the `LogCreateRecord` trait in your `CreateRecord` class as follows:
 
 ```php
-use Noxo\FilamentActivityLog\Extensions\LogCreateRecord;
+use Noin\FilamentActivityLog\Extensions\LogCreateRecord;
 
 class CreateProduct extends CreateRecord
 {
@@ -48,7 +48,7 @@ public function afterCreate()
 To enable activity logging when editing records in Filament, you should use the `LogEditRecord` trait in your `EditRecord` class:
 
 ```php
-use Noxo\FilamentActivityLog\Extensions\LogEditRecord;
+use Noin\FilamentActivityLog\Extensions\LogEditRecord;
 
 class EditProduct extends EditRecord
 {

@@ -16,7 +16,7 @@ Create a page in your pages folder `app/Filament/Pages/` and extends the `ListAc
 
 namespace App\Filament\Pages;
 
-use Noxo\FilamentActivityLog\Pages\ListActivities;
+use Noin\FilamentActivityLog\Pages\ListActivities;
 
 class Activities extends ListActivities
 {

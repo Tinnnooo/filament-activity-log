@@ -1,9 +1,9 @@
 <?php
 
-namespace Noxo\FilamentActivityLog\Loggers\Concerns;
+namespace Noin\FilamentActivityLog\Loggers\Concerns;
 
 use Illuminate\Contracts\Support\Htmlable;
-use Noxo\FilamentActivityLog\Loggers\Logger;
+use Noin\FilamentActivityLog\Loggers\Logger;
 
 trait HasLabel
 {

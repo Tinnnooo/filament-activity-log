@@ -1,6 +1,6 @@
 <?php
 
-namespace Noxo\FilamentActivityLog\ResourceLogger\Concerns;
+namespace Noin\FilamentActivityLog\ResourceLogger\Concerns;
 
 trait HasView
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Noxo\FilamentActivityLog\ResourceLogger\Types;
+namespace Noin\FilamentActivityLog\ResourceLogger\Types;
 
 use DragonCode\Support\Concerns\Makeable;
-use Noxo\FilamentActivityLog\ResourceLogger\Concerns\HasFields;
+use Noin\FilamentActivityLog\ResourceLogger\Concerns\HasFields;
 
 class KeyValueField
 {

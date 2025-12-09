@@ -1,6 +1,6 @@
 <?php
 
-namespace Noxo\FilamentActivityLog\ResourceLogger\Types;
+namespace Noin\FilamentActivityLog\ResourceLogger\Types;
 
 use Filament\Support\Contracts\HasColor;
 use Filament\Support\Contracts\HasIcon;

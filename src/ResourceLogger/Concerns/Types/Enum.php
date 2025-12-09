@@ -1,9 +1,9 @@
 <?php
 
-namespace Noxo\FilamentActivityLog\ResourceLogger\Concerns\Types;
+namespace Noin\FilamentActivityLog\ResourceLogger\Concerns\Types;
 
 use Illuminate\Database\Eloquent\Model;
-use Noxo\FilamentActivityLog\Services\Helper;
+use Noin\FilamentActivityLog\Services\Helper;
 use UnitEnum;
 
 trait Enum

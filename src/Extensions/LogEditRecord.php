@@ -1,8 +1,8 @@
 <?php
 
-namespace Noxo\FilamentActivityLog\Extensions;
+namespace Noin\FilamentActivityLog\Extensions;
 
-use Noxo\FilamentActivityLog\Extensions\Concerns\HasUpdated;
+use Noin\FilamentActivityLog\Extensions\Concerns\HasUpdated;
 
 trait LogEditRecord
 {

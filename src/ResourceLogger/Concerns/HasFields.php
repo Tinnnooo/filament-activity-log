@@ -1,8 +1,8 @@
 <?php
 
-namespace Noxo\FilamentActivityLog\ResourceLogger\Concerns;
+namespace Noin\FilamentActivityLog\ResourceLogger\Concerns;
 
-use Noxo\FilamentActivityLog\ResourceLogger\Field;
+use Noin\FilamentActivityLog\ResourceLogger\Field;
 
 trait HasFields
 {

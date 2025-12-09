@@ -1,10 +1,10 @@
 <?php
 
-namespace Noxo\FilamentActivityLog\ResourceLogger;
+namespace Noin\FilamentActivityLog\ResourceLogger;
 
-use Noxo\FilamentActivityLog\ResourceLogger\Concerns\HasFields;
-use Noxo\FilamentActivityLog\ResourceLogger\Concerns\HasRelationLoader;
-use Noxo\FilamentActivityLog\ResourceLogger\Concerns\HasRelationManagers;
+use Noin\FilamentActivityLog\ResourceLogger\Concerns\HasFields;
+use Noin\FilamentActivityLog\ResourceLogger\Concerns\HasRelationLoader;
+use Noin\FilamentActivityLog\ResourceLogger\Concerns\HasRelationManagers;
 
 class ResourceLogger
 {

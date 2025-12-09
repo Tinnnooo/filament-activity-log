@@ -1,6 +1,6 @@
 @if (!empty($value))
     @php
-        $hasFields = $field->keyValue instanceof \Noxo\FilamentActivityLog\ResourceLogger\Types\KeyValueField;
+        $hasFields = $field->keyValue instanceof \Noin\FilamentActivityLog\ResourceLogger\Types\KeyValueField;
         if ($hasFields) {
             $fields = $field->keyValue->getFields();
         }

@@ -15,10 +15,10 @@ Here's a simple example of a `Logger` for a `Product` model:
 use App\Filament\Resources\ProductResource;
 use App\Models\Product;
 use Illuminate\Contracts\Support\Htmlable;
-use Noxo\FilamentActivityLog\Loggers\Logger;
-use Noxo\FilamentActivityLog\ResourceLogger\Field;
-use Noxo\FilamentActivityLog\ResourceLogger\RelationManager;
-use Noxo\FilamentActivityLog\ResourceLogger\ResourceLogger;
+use Noin\FilamentActivityLog\Loggers\Logger;
+use Noin\FilamentActivityLog\ResourceLogger\Field;
+use Noin\FilamentActivityLog\ResourceLogger\RelationManager;
+use Noin\FilamentActivityLog\ResourceLogger\ResourceLogger;
 use Spatie\Activitylog\Models\Activity;
 
 class ProductLogger extends Logger
