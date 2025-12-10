@@ -15,16 +15,18 @@
     $showRelationManager = false;
     if ($logger->relationManager) {
         $relationManagerRoute = $logger->getRelationManagerRoute($activity);
-        $relationManagertLabel = $logger->getRelationManagerLabel();
-        $relationManagertId = $logger->getRelationManagerId($activity);
-        $showRelationManager = $relationManagertLabel || $relationManagertId;
+        $relationManagerLabel = $logger->getRelationManagerLabel();
+        $relationManagerAttribute = $logger->getRelationManagerAttribute($activity);
+        $relationManagerId = $logger->getRelationManagerId($activity);
+        $showRelationManager = $relationManagerLabel || $relationManagerAttribute;
     }
 
     // Subject
     $subjectRoute = $logger->getSubjectRoute($activity);
     $subjectLabel = $logger->getSubjectLabel();
-    $subjectId = $logger->getSubjectId($activity);
-    $showSubject = $subjectLabel || $subjectId;
+    $subjectAttribute = $logger->getSubjectAttribute($activity);
+    $subjectId = $logger->getRelationManagerId($activity);
+    $showSubject = $subjectLabel || $subjectAttribute;
 @endphp
 
 <div
@@ -83,9 +85,10 @@
                     'opacity-70 transition group-hover:opacity-100',
                     'dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300',
                 ])
+                x-tooltip="{ content: @js($relationManagerId) }"
             >
-                <span>{{ $relationManagertLabel }}</span>
-                <span>{{ $relationManagertId }}</span>
+                <span>{{ $relationManagerLabel }}</span>
+                <span>{{ $relationManagerAttribute }}</span>
             </a>
         @endif
 
@@ -98,9 +101,10 @@
                     'opacity-70 transition group-hover:opacity-100',
                     'dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300',
                 ])
+                x-tooltip="{ content: @js($subjectId) }"
             >
                 <span>{{ $subjectLabel }}</span>
-                <span>{{ $subjectId }}</span>
+                <span>{{ $subjectAttribute }}</span>
             </a>
         @endif
 
