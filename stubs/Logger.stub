@@ -3,7 +3,7 @@
 namespace {{ namespace }};
 
 use {{ modelNamespace }};
-use {{ resourceNamespace }}\{{ modelClass }}Resource;
+use {{ resourceNamespace }}\{{ modelClass }}\{{ modelClass }}Resource;
 use Illuminate\Contracts\Support\Htmlable;
 use Noin\FilamentActivityLog\Loggers\Logger;
 use Noin\FilamentActivityLog\ResourceLogger\Field;

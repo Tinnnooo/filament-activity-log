@@ -48,6 +48,13 @@ trait HasResourceLogger
 
     public function getSubjectId(Activity $activity): ?string
     {
-        return '#' . $activity->subject_id;
+        return '<' . $activity->subject_id . '>';
+    }
+
+    public function getSubjectAttribute(Activity $activity): ?string
+    {
+        $recordTitleAttribute = $this->getRecordTitleAttribute();
+
+        return '< ' . ($recordTitleAttribute ? $activity->subject->{$recordTitleAttribute} : $activity->subject_id) . ' >';
     }
 }

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Noin\FilamentActivityLog\Loggers\Concerns\HasCaused;
 use Noin\FilamentActivityLog\Loggers\Concerns\HasEvents;
 use Noin\FilamentActivityLog\Loggers\Concerns\HasLabel;
+use Noin\FilamentActivityLog\Loggers\Concerns\HasRecordTitleAttribute;
 use Noin\FilamentActivityLog\Loggers\Concerns\HasRelationManager;
 use Noin\FilamentActivityLog\Loggers\Concerns\HasResourceLogger;
 use Noin\FilamentActivityLog\Loggers\Concerns\Loggable;
@@ -17,6 +18,7 @@ class Logger
     use HasCaused;
     use HasEvents;
     use HasLabel;
+    use HasRecordTitleAttribute;
     use HasRelationManager;
     use HasResourceLogger;
     use Loggable;

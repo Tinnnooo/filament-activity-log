@@ -182,12 +182,91 @@ trait HasListFilters
             );
     }
 
+    /**
+     * @deprecated Use getSubjectKeyField() instead. This method will be removed in a future version.
+     */
     protected function getSubjectIDField()
     {
         return TextInput::make('subject_id')
             ->label(__('filament-activity-log::activities.filters.subject_id'))
             ->visible(fn (callable $get) => $get('subject_type'))
             ->numeric();
+    }
+
+    protected function getSubjectKeyField(): Select
+    {
+        return Select::make('subject_id')
+            ->label('Subject key')
+            ->searchable()
+            ->visible(fn (callable $get): bool => (bool) $get('subject_type'))
+            ->optionsLimit(10)
+            ->options(function (callable $get) {
+                $subjectType = $get('subject_type');
+
+                if (empty($subjectType)) {
+                    return [];
+                }
+
+                $logger = new (Loggers::getLoggerByModel($subjectType));
+
+                $label = (method_exists($logger, 'getRecordTitleAttribute') ? $logger->getRecordTitleAttribute() : 'id');
+
+                return $subjectType::select(
+                    [
+                        'id',
+                        $label,
+                    ]
+                )
+                    ->whereNotNull($label)
+                    ->latest()
+                    ->limit(10)
+                    ->pluck($label, 'id')
+                    ->toArray();
+            })
+            ->getSearchResultsUsing(function (?string $search, callable $get) {
+                $subjectType = $get('subject_type');
+
+                if (empty($subjectType)) {
+                    return [];
+                }
+
+                $logger = new (Loggers::getLoggerByModel($subjectType));
+
+                $label = (method_exists($logger, 'getRecordTitleAttribute') ? $logger->getRecordTitleAttribute() : 'id');
+
+                return $subjectType::select(
+                    [
+                        'id',
+                        $label,
+                    ]
+                )
+                    ->whereNotNull($label)
+                    ->when(
+                        $search,
+                        fn (Builder $query, string $search) => $query->where($label, 'like', "%{$search}%")
+                    )
+                    ->latest()
+                    ->limit(10)
+                    ->pluck($label, 'id')
+                    ->toArray();
+            })
+            ->getOptionLabelUsing(function (?string $value, callable $get) {
+                if (! $value) {
+                    return null;
+                }
+
+                $subjectType = $get('subject_type');
+
+                if (empty($subjectType)) {
+                    return null;
+                }
+
+                $logger = new (Loggers::getLoggerByModel($subjectType));
+
+                $label = (method_exists($logger, 'getRecordTitleAttribute') ? $logger->getRecordTitleAttribute() : 'id');
+
+                return $subjectType::find($value)?->{$label};
+            });
     }
 
     protected function getEventField()
