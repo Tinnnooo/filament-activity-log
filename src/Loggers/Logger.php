@@ -6,6 +6,7 @@ use Closure;
 use DragonCode\Support\Concerns\Makeable;
 use Illuminate\Database\Eloquent\Model;
 use Noin\FilamentActivityLog\Loggers\Concerns\HasCaused;
+use Noin\FilamentActivityLog\Loggers\Concerns\HasDescription;
 use Noin\FilamentActivityLog\Loggers\Concerns\HasEvents;
 use Noin\FilamentActivityLog\Loggers\Concerns\HasLabel;
 use Noin\FilamentActivityLog\Loggers\Concerns\HasRecordTitleAttribute;
@@ -16,6 +17,7 @@ use Noin\FilamentActivityLog\Loggers\Concerns\Loggable;
 class Logger
 {
     use HasCaused;
+    use HasDescription;
     use HasEvents;
     use HasLabel;
     use HasRecordTitleAttribute;

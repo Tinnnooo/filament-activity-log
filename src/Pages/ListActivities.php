@@ -8,11 +8,16 @@ use Filament\Schemas\Concerns\InteractsWithSchemas;
 use Filament\Schemas\Contracts\HasSchemas;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
+use Illuminate\Contracts\Pagination\CursorPaginator;
+use Illuminate\Contracts\Pagination\Paginator;
 use Livewire\WithPagination;
 use Noin\FilamentActivityLog\Pages\Concerns\CanCollapse;
 use Noin\FilamentActivityLog\Pages\Concerns\CanPaginateRecords;
+use Noin\FilamentActivityLog\Pages\Concerns\CanRefreshPage;
+use Noin\FilamentActivityLog\Pages\Concerns\HasEmbedContent;
 use Noin\FilamentActivityLog\Pages\Concerns\HasListFilters;
 use Noin\FilamentActivityLog\Pages\Concerns\HasLogger;
+use Noin\FilamentActivityLog\Pages\Concerns\HasRecords;
 use Noin\FilamentActivityLog\Pages\Concerns\HasTimezone;
 use Noin\FilamentActivityLog\Pages\Concerns\UrlHandling;
 use Spatie\Activitylog\Models\Activity;
@@ -21,16 +26,19 @@ abstract class ListActivities extends Page implements HasSchemas
 {
     use CanCollapse;
     use CanPaginateRecords;
+    use CanRefreshPage;
+    use HasEmbedContent;
     use HasListFilters;
     use HasLogger;
+    use HasRecords;
     use HasTimezone;
     use InteractsWithSchemas;
     use UrlHandling;
     use WithPagination;
 
-    protected string $view = 'filament-activity-log::list.index';
+    protected string $view = 'filament-activity-log::pages.activities';
 
-    protected static string | \BackedEnum | null $navigationIcon = Heroicon::FingerPrint;
+    protected static string|\BackedEnum|null $navigationIcon = Heroicon::FingerPrint;
 
     public function getTitle(): string
     {
@@ -41,6 +49,8 @@ abstract class ListActivities extends Page implements HasSchemas
     {
         return __('filament-activity-log::activities.title');
     }
+
+    public string $emptyHeaderName = 'Unknown';
 
     public function mount(): void
     {
@@ -65,13 +75,17 @@ abstract class ListActivities extends Page implements HasSchemas
             ->debounce();
     }
 
-    public function getActivities()
+    public function getActivities(): CursorPaginator|Paginator
     {
         $activityModel = config('activitylog.activity_model') ?? Activity::class;
 
-        return $this->paginateTableQuery(
+        $paginator = $this->paginateTableQuery(
             $this->applyFilters($activityModel::with('causer', 'subject')->latest())
         );
+
+        $this->records($paginator->items());
+
+        return $paginator;
     }
 
     protected function getDefaultTableRecordsPerPageSelectOption(): int

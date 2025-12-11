@@ -7,7 +7,7 @@ use Noin\FilamentActivityLog\Loggers\Logger;
 
 trait HasLabel
 {
-    public static function getLabel(): string | Htmlable | null
+    public static function getLabel(): string|Htmlable|null
     {
         /** @var Logger $this */
         return (string) str(static::$model)

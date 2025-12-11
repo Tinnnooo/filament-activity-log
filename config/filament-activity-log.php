@@ -9,4 +9,8 @@ return [
     ],
 
     'boolean' => BooleanEnum::class,
+
+    'custom_event_styles' => [
+        //
+    ],
 ];
