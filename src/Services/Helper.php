@@ -24,7 +24,7 @@ final class Helper
     /**
      * @return class-string<Logger>
      */
-    public static function resolveLogger(null | string | Model $record, bool $force = false): ?string
+    public static function resolveLogger(null|string|Model $record, bool $force = false): ?string
     {
         if (! $record) {
             return null;
@@ -55,5 +55,26 @@ final class Helper
         }
 
         return null;
+    }
+
+    public static function getEventStyle(?string $event): string
+    {
+        $defaultStyles = [
+            'created' => 'success',
+            'attached' => 'success',
+            'associated' => 'success',
+            'updated' => 'primary',
+            'deleted' => 'danger',
+            'detached' => 'danger',
+            'dissociated' => 'danger',
+            'restored' => 'warning',
+        ];
+
+        $customStyles = array_replace_recursive(
+            $defaultStyles,
+            config('filament-activity-log.custom_event_styles', [])
+        );
+
+        return $customStyles[$event] ?? 'gray';
     }
 }

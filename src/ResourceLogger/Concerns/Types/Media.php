@@ -3,6 +3,8 @@
 namespace Noin\FilamentActivityLog\ResourceLogger\Concerns\Types;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\View\ComponentAttributeBag;
+use Noin\FilamentActivityLog\ResourceLogger\Field;
 
 trait Media
 {
@@ -46,5 +48,22 @@ trait Media
         $this->rounded = 'square';
 
         return $this;
+    }
+
+    public function displayImage(mixed $value, Field $field): string
+    {
+        ob_start(); ?>
+        <div class="flex flex-wrap gap-2">
+            <?php foreach ((array) $value as $_value) { ?>
+                <img
+                    src="<?= $_value ?>"
+                    <?= (new ComponentAttributeBag)->class([
+                        'fi-avatar',
+                        'fi-size-lg',
+                        $field->rounded === 'circle' ? 'fi-rounded-full' : 'fi-rounded-md',
+                    ]) ?>>
+            <?php } ?>
+        </div>
+<?php return ob_get_clean();
     }
 }

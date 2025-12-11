@@ -13,7 +13,7 @@ trait CanPaginateRecords
      */
     public $tableRecordsPerPage = null;
 
-    protected function paginateTableQuery(Builder $query): Paginator | CursorPaginator
+    protected function paginateTableQuery(Builder $query): Paginator|CursorPaginator
     {
         $perPage = $this->getTableRecordsPerPage() ?? $this->getDefaultTableRecordsPerPageSelectOption();
 
@@ -31,7 +31,7 @@ trait CanPaginateRecords
         return $records->onEachSide(0);
     }
 
-    public function getTableRecordsPerPage(): int | string | null
+    public function getTableRecordsPerPage(): int|string|null
     {
         return $this->tableRecordsPerPage;
     }

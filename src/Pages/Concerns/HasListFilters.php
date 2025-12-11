@@ -152,10 +152,10 @@ trait HasListFilters
                         'value' => "{$activity->causer_type}:{$activity->causer_id}",
                         'label' => Blade::render(
                             '<x-filament::avatar
-                                src="' . filament()->getUserAvatarUrl($activity->causer) . '"
+                                src="'.filament()->getUserAvatarUrl($activity->causer).'"
                                 size="sm"
                                 class="inline mr-2"
-                            /> ' . $activity->causer?->name
+                            /> '.$activity->causer?->name
                         ),
                     ])
                     ->pluck('label', 'value');
