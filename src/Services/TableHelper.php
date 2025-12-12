@@ -35,8 +35,6 @@ final class TableHelper
                 </tbody>
             </table>
         </div>
-
-
     <?php return ob_get_clean();
     }
 
@@ -211,13 +209,107 @@ final class TableHelper
             <?= (new ComponentAttributeBag)
                 ->merge([
                     'x-data' => '{
-                    oldValue: `'.htmlspecialchars($oldValue, ENT_QUOTES).'`,
-                    newValue: `'.htmlspecialchars($newValue, ENT_QUOTES)."`,
-                    method: '".($options['method'] ?? 'diffWords')."',
-                    options: ".json_encode($options['options'] ?? []).'
+                    oldValue: `' . htmlspecialchars($oldValue, ENT_QUOTES) . '`,
+                    newValue: `' . htmlspecialchars($newValue, ENT_QUOTES) . "`,
+                    method: '" . ($options['method'] ?? 'diffWords') . "',
+                    options: " . json_encode($options['options'] ?? []) . '
                 }',
                     'x-html' => 'getStringsDifference(oldValue, newValue, method, options)',
                 ]) ?>>
+        </div>
+    <?php return ob_get_clean();
+    }
+
+    public static function getTableTemplateHtml(bool $hasOld, Collection $changes, Logger $logger): string
+    {
+        $headerCells = [
+            'default' => [
+                TableHelper::getTableHeaderCellHtml(
+                    value: __('filament-activity-log::activities.table.field'),
+                    attributes: (new ComponentAttributeBag)
+                        ->class([
+                            'py-2! border-r border-gray-200 last:border-r-0',
+                        ])
+                        ->merge([
+                            'width' => '20%',
+                        ])
+                ),
+                TableHelper::getTableHeaderCellHtml(
+                    value: __('filament-activity-log::activities.table.old'),
+                    attributes: (new ComponentAttributeBag)
+                        ->class([
+                            'py-2! border-r border-gray-200 last:border-r-0',
+                        ])
+                        ->merge([
+                            'width' => '40%',
+                        ])
+                ),
+                TableHelper::getTableHeaderCellHtml(
+                    value: __('filament-activity-log::activities.table.new'),
+                    attributes: (new ComponentAttributeBag)
+                        ->class([
+                            'py-2! last:border-r-0',
+                        ])
+                        ->merge([
+                            'width' => '40%',
+                        ])
+                ),
+            ],
+            'simple' => [
+                TableHelper::getTableHeaderCellHtml(
+                    value: __('filament-activity-log::activities.table.field'),
+                    attributes: (new ComponentAttributeBag)
+                        ->class([
+                            'py-2! border-r border-gray-200 last:border-r-0',
+                        ])
+                        ->merge([
+                            'width' => '20%',
+                        ])
+                ),
+                TableHelper::getTableHeaderCellHtml(
+                    value: __('filament-activity-log::activities.table.value'),
+                    attributes: (new ComponentAttributeBag)
+                        ->class([
+                            'py-2! last:border-r-0',
+                        ])
+                        ->merge([
+                            'width' => '80%',
+                        ])
+                ),
+            ],
+        ];
+
+        $bodyRows = [];
+
+        if ($hasOld) {
+            $bodyRows = TableHelper::getTableBodyDefaultHtml(
+                changes: $changes,
+                logger: $logger,
+            );
+        } else {
+            $bodyRows = TableHelper::getTableBodySimpleHtml(
+                changes: $changes,
+                logger: $logger,
+            );
+        }
+
+        ob_start(); ?>
+
+        <div
+            <?= (new ComponentAttributeBag)
+                ->class([
+                    'mt-2',
+                ])
+                ->merge([
+                    'x-show' => '!isCollapsed',
+                ])
+            ?>>
+            <?= TableHelper::getTableHtml(
+                headerCells: $headerCells,
+                bodyRows: $bodyRows,
+                hasOld: $hasOld,
+                logger: $logger
+            ) ?>
         </div>
 <?php return ob_get_clean();
     }

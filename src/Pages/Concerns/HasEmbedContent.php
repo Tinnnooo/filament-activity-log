@@ -34,13 +34,13 @@ trait HasEmbedContent
 
                 <?php if ($date !== $prevDate) { ?>
                     <div <?= (new ComponentAttributeBag)
-                    ->class([
-                        'px-4 py-2 w-fit mx-auto',
-                        'shadow-md rounded-full',
-                        'bg-white text-gray-600 text-sm font-medium',
-                        'dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300',
-                        'sticky top-2',
-                    ])->toHtml() ?>>
+                                ->class([
+                                    'px-4 py-2 w-fit mx-auto',
+                                    'shadow-md rounded-full',
+                                    'bg-white text-gray-600 text-sm font-medium',
+                                    'dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300',
+                                    'sticky top-2',
+                                ])->toHtml() ?>>
                         <?= $date ?>
                     </div>
 
@@ -89,18 +89,18 @@ trait HasEmbedContent
 
             // Changes state
             $changes = $record->getChangesAttribute();
-        $attributes = (array) ($changes['attributes'] ?? []);
-        $old = (array) ($changes['old'] ?? []);
-        $hasChanges = ! empty($attributes);
-        $hasOld = ! empty($old);
+            $attributes = (array) ($changes['attributes'] ?? []);
+            $old = (array) ($changes['old'] ?? []);
+            $hasChanges = ! empty($attributes);
+            $hasOld = ! empty($old);
 
-        // Inline state
-        $isInlineSingle = count($attributes) === 1;
-        $inlineField = $hasOld && $isInlineSingle ? Helper::resolveInlineField($logger, $attributes, $old) : null;
+            // Inline state
+            $isInlineSingle = count($attributes) === 1;
+            $inlineField = $hasOld && $isInlineSingle ? Helper::resolveInlineField($logger, $attributes, $old) : null;
 
-        // Description state
-        $shouldShowDescription = $logger->shouldShowDescription();
-        ?>
+            // Description state
+            $shouldShowDescription = $logger->shouldShowDescription();
+            ?>
 
             <?= $this->getHeaderHtml(
                 hasChanges: $hasChanges,
@@ -115,94 +115,11 @@ trait HasEmbedContent
             ) ?>
 
             <?php if (empty($inlineField) && $hasChanges) { ?>
-                <?php
-                $headerCells = [
-                    'default' => [
-                        TableHelper::getTableHeaderCellHtml(
-                            value: __('filament-activity-log::activities.table.field'),
-                            attributes: (new ComponentAttributeBag)
-                                ->class([
-                                    'py-2! border-r border-gray-200 last:border-r-0',
-                                ])
-                                ->merge([
-                                    'width' => '20%',
-                                ])
-                        ),
-                        TableHelper::getTableHeaderCellHtml(
-                            value: __('filament-activity-log::activities.table.old'),
-                            attributes: (new ComponentAttributeBag)
-                                ->class([
-                                    'py-2! border-r border-gray-200 last:border-r-0',
-                                ])
-                                ->merge([
-                                    'width' => '40%',
-                                ])
-                        ),
-                        TableHelper::getTableHeaderCellHtml(
-                            value: __('filament-activity-log::activities.table.new'),
-                            attributes: (new ComponentAttributeBag)
-                                ->class([
-                                    'py-2! last:border-r-0',
-                                ])
-                                ->merge([
-                                    'width' => '40%',
-                                ])
-                        ),
-                    ],
-                    'simple' => [
-                        TableHelper::getTableHeaderCellHtml(
-                            value: __('filament-activity-log::activities.table.field'),
-                            attributes: (new ComponentAttributeBag)
-                                ->class([
-                                    'py-2! border-r border-gray-200 last:border-r-0',
-                                ])
-                                ->merge([
-                                    'width' => '20%',
-                                ])
-                        ),
-                        TableHelper::getTableHeaderCellHtml(
-                            value: __('filament-activity-log::activities.table.value'),
-                            attributes: (new ComponentAttributeBag)
-                                ->class([
-                                    'py-2! last:border-r-0',
-                                ])
-                                ->merge([
-                                    'width' => '80%',
-                                ])
-                        ),
-                    ],
-                ];
-
-                $bodyRows = [];
-
-                if ($hasOld) {
-                    $bodyRows = TableHelper::getTableBodyDefaultHtml(
-                        changes: $changes,
-                        logger: $logger,
-                    );
-                } else {
-                    $bodyRows = TableHelper::getTableBodySimpleHtml(
-                        changes: $changes,
-                        logger: $logger,
-                    );
-                }
-                ?>
-                <div
-                    <?= (new ComponentAttributeBag)
-                        ->class([
-                            'mt-2',
-                        ])
-                        ->merge([
-                            'x-show' => '!isCollapsed',
-                        ])
-                ?>>
-                    <?= TableHelper::getTableHtml(
-                        headerCells: $headerCells,
-                        bodyRows: $bodyRows,
-                        hasOld: $hasOld,
-                        logger: $logger
-                    ) ?>
-                </div>
+                <?= TableHelper::getTableTemplateHtml(
+                    hasOld: $hasOld,
+                    changes: $changes,
+                    logger: $logger,
+                ) ?>
             <?php } ?>
 
         </div>
@@ -298,7 +215,7 @@ trait HasEmbedContent
                                 'x-bind:class' => "{ '-rotate-180': !isCollapsed }",
                             ])
                     )
-                    ->toHtml() ?>
+                        ->toHtml() ?>
                 <?php } ?>
             </div>
         </div>
@@ -348,7 +265,7 @@ trait HasEmbedContent
                     ])
                     ->color(BadgeComponent::class, Helper::getEventStyle($record->event))
                     ->toHtml() ?>>
-                <?= __('filament-activity-log::activities.events.'.$record->event.'.description') ?>
+                <?= __('filament-activity-log::activities.events.' . $record->event . '.description') ?>
             </span>
 
             <?php if ($showRelationManager) { ?>
