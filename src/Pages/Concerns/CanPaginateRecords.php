@@ -13,6 +13,17 @@ trait CanPaginateRecords
      */
     public $tableRecordsPerPage = null;
 
+    protected int | string | null $defaultTableRecordsPerPageSelectOption = null;
+
+    public function updatedTableRecordsPerPage(): void
+    {
+        session()->put([
+            $this->getTablePerPageSessionKey() => $this->getTableRecordsPerPage(),
+        ]);
+
+        $this->resetPage();
+    }
+
     protected function paginateTableQuery(Builder $query): Paginator | CursorPaginator
     {
         $perPage = $this->getTableRecordsPerPage() ?? $this->getDefaultTableRecordsPerPageSelectOption();
@@ -48,11 +59,31 @@ trait CanPaginateRecords
 
     protected function getDefaultTableRecordsPerPageSelectOption(): int
     {
-        return 10;
+        $option = session()->get(
+            $this->getTablePerPageSessionKey(),
+            $this->defaultTableRecordsPerPageSelectOption ?? 10,
+        );
+        dd($option);
+
+        $pageOptions = $this->getTableRecordsPerPageSelectOptions();
+
+        if (in_array($option, $pageOptions)) {
+            return $option;
+        }
+        session()->remove($this->getTablePerPageSessionKey());
+
+        return $pageOptions[0];
     }
 
     protected function getTableRecordsPerPageSelectOptions(): array
     {
-        return [10, 25, 50];
+        return [10, 25, 50, 'all'];
+    }
+
+    public function getTablePerPageSessionKey(): string
+    {
+        $page = md5($this::class);
+
+        return "activities.{$page}_per_page";
     }
 }
