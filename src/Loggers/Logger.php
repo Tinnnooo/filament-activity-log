@@ -9,6 +9,7 @@ use Noin\FilamentActivityLog\Loggers\Concerns\HasCaused;
 use Noin\FilamentActivityLog\Loggers\Concerns\HasDescription;
 use Noin\FilamentActivityLog\Loggers\Concerns\HasEvents;
 use Noin\FilamentActivityLog\Loggers\Concerns\HasLabel;
+use Noin\FilamentActivityLog\Loggers\Concerns\HasLimit;
 use Noin\FilamentActivityLog\Loggers\Concerns\HasRecordTitleAttribute;
 use Noin\FilamentActivityLog\Loggers\Concerns\HasRelationManager;
 use Noin\FilamentActivityLog\Loggers\Concerns\HasResourceLogger;
@@ -20,6 +21,7 @@ class Logger
     use HasDescription;
     use HasEvents;
     use HasLabel;
+    use HasLimit;
     use HasRecordTitleAttribute;
     use HasRelationManager;
     use HasResourceLogger;
