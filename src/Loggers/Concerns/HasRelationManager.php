@@ -13,7 +13,7 @@ trait HasRelationManager
 
     protected ?Model $ownerRecord = null;
 
-    public function relationManager(string|RelationManager $manager): static
+    public function relationManager(string | RelationManager $manager): static
     {
         if (is_string($manager)) {
             $manager = static::getRelationManager($manager);
@@ -60,7 +60,7 @@ trait HasRelationManager
         $relationName = data_get($relationData, 'name');
 
         if (! $relatedId || ! $relationName || ! $activity->subject) {
-            return '< '.($relatedId ?? '-').' >';
+            return '< ' . ($relatedId ?? '-') . ' >';
         }
 
         $activity->subject->loadMissing($relationName);
@@ -87,6 +87,6 @@ trait HasRelationManager
             }
         }
 
-        return '< '.($relatedId ?? '-').' >';
+        return '< ' . ($relatedId ?? '-') . ' >';
     }
 }

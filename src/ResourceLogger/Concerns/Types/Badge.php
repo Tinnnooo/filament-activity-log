@@ -26,7 +26,7 @@ trait Badge
         return $this;
     }
 
-    public function displayBadge(UnitEnum|array|string $value, Field $field): string
+    public function displayBadge(UnitEnum | array | string $value, Field $field): string
     {
         ob_start(); ?>
         <div class="flex flex-wrap gap-2">

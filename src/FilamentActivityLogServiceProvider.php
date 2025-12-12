@@ -29,7 +29,7 @@ class FilamentActivityLogServiceProvider extends PackageServiceProvider
 
     public function shortName(): string
     {
-        return 'noin/'.self::$name;
+        return 'noin/' . self::$name;
     }
 
     public function bootingPackage()
@@ -38,8 +38,8 @@ class FilamentActivityLogServiceProvider extends PackageServiceProvider
         app(LogActions::class)->configure();
 
         FilamentAsset::register([
-            Css::make('filament-activity-log-styles', __DIR__.'/../resources/dist/filament-activity-log.css'),
-            Js::make('filament-activity-log-scripts', __DIR__.'/../resources/dist/filament-activity-log.js'),
+            Css::make('filament-activity-log-styles', __DIR__ . '/../resources/dist/filament-activity-log.css'),
+            Js::make('filament-activity-log-scripts', __DIR__ . '/../resources/dist/filament-activity-log.js'),
         ], $this->shortName());
     }
 }

@@ -96,7 +96,7 @@ class MakeLoggerCommand extends Command
             'class' => $loggerClass,
             'modelClass' => $modelClass,
             'resourceNamespace' => $resourceNamespace,
-            'modelNamespace' => 'App\\Models'.($modelNamespace !== '' ? "\\{$modelNamespace}" : '').'\\'.$modelClass,
+            'modelNamespace' => 'App\\Models' . ($modelNamespace !== '' ? "\\{$modelNamespace}" : '') . '\\' . $modelClass,
         ]);
 
         $this->components->info("Filament logger [{$loggerPath}] created successfully.");
@@ -111,7 +111,7 @@ class MakeLoggerCommand extends Command
     {
         $filesystem = app(Filesystem::class);
 
-        $stubPath = __DIR__.'/../../stubs/Logger.stub';
+        $stubPath = __DIR__ . '/../../stubs/Logger.stub';
 
         $stub = str($filesystem->get($stubPath));
 

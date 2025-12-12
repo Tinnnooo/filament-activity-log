@@ -24,7 +24,7 @@ final class Helper
     /**
      * @return class-string<Logger>
      */
-    public static function resolveLogger(null|string|Model $record, bool $force = false): ?string
+    public static function resolveLogger(null | string | Model $record, bool $force = false): ?string
     {
         if (! $record) {
             return null;
