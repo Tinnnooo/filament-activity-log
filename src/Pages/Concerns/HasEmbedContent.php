@@ -6,7 +6,6 @@ use App\Models\User;
 use Filament\Support\Icons\Heroicon;
 use Filament\Support\View\Components\BadgeComponent;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
 use Illuminate\View\ComponentAttributeBag;
 use Noin\FilamentActivityLog\Loggers\Logger;
 use Noin\FilamentActivityLog\Services\Helper;
@@ -151,7 +150,6 @@ trait HasEmbedContent
         $subjectAttribute = $logger->getSubjectAttribute($record);
         $subjectId = $logger->getSubjectId($record);
         $showSubject = $subjectLabel || $subjectAttribute;
-        $limit = $logger->getLimit();
 
         ob_start(); ?>
         <!-- Header -->
@@ -204,7 +202,6 @@ trait HasEmbedContent
                     subjectLabel: $subjectLabel ?? null,
                     subjectAttribute: $subjectAttribute ?? null,
                     subjectId: $subjectId ?? null,
-                    limit: $limit,
                 ) ?>
 
                 <!-- Chevron Icon -->
@@ -256,7 +253,6 @@ trait HasEmbedContent
         ?string $subjectLabel,
         ?string $subjectAttribute,
         ?string $subjectId,
-        int $limit = 50,
     ): string {
         ob_start(); ?>
         <div class="flex gap-2">
@@ -291,7 +287,7 @@ trait HasEmbedContent
                         ])
                         ->toHtml() ?>>
                     <span><?= $relationManagerLabel ?></span>
-                    <span><?= Str::limit($relationManagerAttribute, $limit) ?></span>
+                    <span><?= $relationManagerAttribute ?></span>
                 </a>
             <?php } ?>
 
@@ -313,7 +309,7 @@ trait HasEmbedContent
                         ])
                         ->toHtml() ?>>
                     <span><?= $subjectLabel ?></span>
-                    <span><?= Str::limit($subjectAttribute, $limit) ?></span>
+                    <span><?= $subjectAttribute ?></span>
                 </a>
             <?php } ?>
         </div>
