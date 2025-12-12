@@ -87,14 +87,4 @@ abstract class ListActivities extends Page implements HasSchemas
 
         return $paginator;
     }
-
-    protected function getDefaultTableRecordsPerPageSelectOption(): int
-    {
-        return 10;
-    }
-
-    protected function getTableRecordsPerPageSelectOptions(): array
-    {
-        return [10, 25, 50];
-    }
 }

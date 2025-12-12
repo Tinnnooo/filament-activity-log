@@ -34,9 +34,20 @@ trait HasListFilters
         'event' => ['except' => null],
     ];
 
+    public function updated($property): void
+    {
+        $pageName = $this->getTablePaginationPageName();
+
+        if ($property !== $pageName) {
+            $this->resetPage($pageName);
+        }
+    }
+
     public function resetFiltersForm(): void
     {
         $this->form->fill();
+
+        $this->resetPage($this->getTablePaginationPageName());
     }
 
     public function getFilters(): array
