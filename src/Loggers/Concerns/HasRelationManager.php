@@ -4,6 +4,7 @@ namespace Noin\FilamentActivityLog\Loggers\Concerns;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use Noin\FilamentActivityLog\ResourceLogger\RelationManager;
 use Spatie\Activitylog\Models\Activity;
 
@@ -83,7 +84,7 @@ trait HasRelationManager
             $titleValue = $record->getAttribute($recordTitleAttribute);
 
             if ($titleValue) {
-                return "< {$titleValue} >";
+                return '< ' . Str::limit($titleValue, $this->getLimit()) . ' >';
             }
         }
 

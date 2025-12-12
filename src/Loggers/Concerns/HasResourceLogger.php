@@ -2,6 +2,7 @@
 
 namespace Noin\FilamentActivityLog\Loggers\Concerns;
 
+use Illuminate\Support\Str;
 use Noin\FilamentActivityLog\ResourceLogger\Field;
 use Noin\FilamentActivityLog\ResourceLogger\ResourceLogger;
 use Spatie\Activitylog\Models\Activity;
@@ -55,6 +56,8 @@ trait HasResourceLogger
     {
         $recordTitleAttribute = $this->getRecordTitleAttribute();
 
-        return '< ' . ($recordTitleAttribute ? ($activity->subject?->{$recordTitleAttribute} ?? $activity->subject_id) : $activity->subject_id) . ' >';
+        $value = ($recordTitleAttribute ? ($activity->subject?->{$recordTitleAttribute} ?? $activity->subject_id) : $activity->subject_id);
+
+        return '< ' . Str::limit($value, $this->getLimit()) . ' >';
     }
 }
