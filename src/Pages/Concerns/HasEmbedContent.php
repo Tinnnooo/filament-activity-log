@@ -324,6 +324,7 @@ trait HasEmbedContent
         <img
             src="<?= $src ?>"
             alt="<?= $alt ?>"
+            loading="lazy"
             <?= (new ComponentAttributeBag)
                 ->class([
                     'fi-avatar',
