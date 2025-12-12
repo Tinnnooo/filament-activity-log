@@ -38,7 +38,7 @@ abstract class ListActivities extends Page implements HasSchemas
 
     protected string $view = 'filament-activity-log::pages.activities';
 
-    protected static string|\BackedEnum|null $navigationIcon = Heroicon::FingerPrint;
+    protected static string | \BackedEnum | null $navigationIcon = Heroicon::FingerPrint;
 
     public function getTitle(): string
     {
@@ -75,7 +75,7 @@ abstract class ListActivities extends Page implements HasSchemas
             ->debounce();
     }
 
-    public function getActivities(): CursorPaginator|Paginator
+    public function getActivities(): CursorPaginator | Paginator
     {
         $activityModel = config('activitylog.activity_model') ?? Activity::class;
 

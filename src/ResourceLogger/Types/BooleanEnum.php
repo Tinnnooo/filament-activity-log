@@ -13,7 +13,7 @@ enum BooleanEnum: string implements HasColor, HasIcon, HasLabel
 
     public function getLabel(): string
     {
-        return __('filament-activity-log::activities.boolean.'.$this->value);
+        return __('filament-activity-log::activities.boolean.' . $this->value);
     }
 
     public function getColor(): ?string

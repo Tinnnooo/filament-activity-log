@@ -27,7 +27,7 @@ trait CanDisplay
 
     public function renderTemplate(string $template, array $data = []): string
     {
-        return $this->{'display'.ucfirst(Str::camel($template))}(...$data);
+        return $this->{'display' . ucfirst(Str::camel($template))}(...$data);
     }
 
     public function displayDefault(mixed $value, Field $field): string

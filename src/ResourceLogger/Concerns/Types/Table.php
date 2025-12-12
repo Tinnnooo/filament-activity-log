@@ -64,10 +64,10 @@ trait Table
         return [$array1, $array2];
     }
 
-    public function displayTable(mixed $value, Field $field): ?string
+    public function displayTable(mixed $value, Field $field): string
     {
         if (empty($value)) {
-            return null;
+            return '-';
         }
 
         $fields = $field->table->getFields();
@@ -78,7 +78,7 @@ trait Table
 
         foreach ($fields as $tableField) {
             $headerCells[] = TableHelper::getTableHeaderCellHtml(
-                value: $isHtmlAllowed ? $tableField->label : e($tableField->label),
+                value: $isHtmlAllowed ? $tableField->getLabel() : e($tableField->getLabel()),
                 attributes: (new ComponentAttributeBag)
                     ->class([
                         'p-2! border-r border-gray-200 last:border-r-0',

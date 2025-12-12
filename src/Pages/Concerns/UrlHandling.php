@@ -14,7 +14,7 @@ trait UrlHandling
     public static function getCauserUrl(Model $causer)
     {
         return parent::getUrl([
-            'causer' => get_class($causer).':'.$causer->id,
+            'causer' => get_class($causer) . ':' . $causer->id,
         ]);
     }
 
