@@ -15,6 +15,11 @@ trait CanPaginateRecords
 
     protected int | string | null $defaultTableRecordsPerPageSelectOption = null;
 
+    public function bootedCanPaginateRecords(): void
+    {
+        $this->tableRecordsPerPage = $this->getDefaultTableRecordsPerPageSelectOption();
+    }
+
     public function updatedTableRecordsPerPage(): void
     {
         session()->put([
@@ -57,13 +62,12 @@ trait CanPaginateRecords
         return $property;
     }
 
-    protected function getDefaultTableRecordsPerPageSelectOption(): int
+    protected function getDefaultTableRecordsPerPageSelectOption(): int | string
     {
         $option = session()->get(
             $this->getTablePerPageSessionKey(),
             $this->defaultTableRecordsPerPageSelectOption ?? 10,
         );
-        dd($option);
 
         $pageOptions = $this->getTableRecordsPerPageSelectOptions();
 
