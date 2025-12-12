@@ -168,7 +168,7 @@ trait HasListFilters
             ->label(__('filament-activity-log::activities.filters.subject_type'))
             ->allowHtml()
             ->native(false)
-            ->serachable()
+            ->searchable()
             ->options(
                 array_column(
                     array_map(fn ($logger) => [
