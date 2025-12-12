@@ -3,6 +3,7 @@
 namespace Noin\FilamentActivityLog\Pages\Concerns;
 
 use App\Models\User;
+use Filament\Support\Enums\IconSize;
 use Filament\Support\Icons\Heroicon;
 use Filament\Support\View\Components\BadgeComponent;
 use Illuminate\Database\Eloquent\Model;
@@ -170,6 +171,23 @@ trait HasEmbedContent
                     <?= $this->getAvatarHtml(
                         user: $record->causer
                     ) ?>
+                <?php } elseif ($this->withNullCauser) { ?>
+                    <?= generate_icon_html(
+                        attributes: (new ComponentAttributeBag)
+                            ->class([
+                                'fi-avatar',
+                                'fi-circular',
+                                'fi-size-md',
+                                'text-gray-400',
+                                'bg-gray-100',
+                                'dark:bg-gray-700',
+                                'dark:text-gray-300',
+                            ]),
+                        icon: Heroicon::UserCircle,
+                        size: IconSize::TwoExtraLarge
+                    )
+                    ->toHtml();
+                    ?>
                 <?php } ?>
 
                 <div class="flex flex-col text-left">

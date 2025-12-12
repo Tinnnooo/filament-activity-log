@@ -6,6 +6,8 @@ use Carbon\Carbon;
 use Exception;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Support\Enums\IconSize;
+use Filament\Support\Icons\Heroicon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
@@ -14,6 +16,8 @@ use Illuminate\View\ComponentAttributeBag;
 use Malzariey\FilamentDaterangepickerFilter\Fields\DateRangePicker;
 use Noin\FilamentActivityLog\Loggers\Loggers;
 use Spatie\Activitylog\Models\Activity;
+
+use function Filament\Support\generate_icon_html;
 
 trait HasListFilters
 {
@@ -95,7 +99,10 @@ trait HasListFilters
 
             [$causer_type, $causer_id] = $parts;
 
-            return compact('causer_type', 'causer_id');
+            return [
+                'causer_type' => $causer_type === $this->emptyHeaderName ? null : $causer_type,
+                'causer_id' => $causer_id === $this->emptyHeaderName ? null : $causer_id,
+            ];
         });
 
         $query
@@ -292,24 +299,45 @@ trait HasListFilters
             });
     }
 
-    protected function getAvatarOptionsHtml(?Model $user): string
+    protected function getAvatarOptionsHtml(?Model $user = null): string
     {
-        $src = filament()->getUserAvatarUrl($user);
+        $src = $user ? filament()->getUserAvatarUrl($user) : null;
         $alt = __('filament-activity-log::activities.filters.causer_avatar_alt', ['name' => $user?->name ?? '']);
+
         ob_start(); ?>
-        <img
-            src="<?= $src ?>"
-            alt="<?= $alt ?>"
-            loading="lazy"
-            <?= (new ComponentAttributeBag)
-                ->class([
-                    'fi-avatar',
-                    'fi-circular',
-                    'fi-size-sm',
-                    'inline mr-2',
-                ])
-                ->toHtml() ?> />
-        <?= $user->name ?? '-' ?>
+        <?php if ($src) { ?>
+            <img
+                src="<?= $src ?>"
+                alt="<?= $alt ?>"
+                loading="lazy"
+                <?= (new ComponentAttributeBag)
+                    ->class([
+                        'fi-avatar',
+                        'fi-circular',
+                        'fi-size-sm',
+                        'inline mr-2',
+                    ])
+                    ->toHtml() ?> />
+        <?php } elseif ($this->withNullCauser) { ?>
+            <?= generate_icon_html(
+                attributes: (new ComponentAttributeBag)
+                    ->class([
+                        'fi-avatar',
+                        'fi-circular',
+                        'fi-size-sm',
+                        'text-gray-400',
+                        'bg-gray-100',
+                        'dark:bg-gray-700',
+                        'dark:text-gray-300',
+                        'inline mr-2',
+                    ]),
+                icon: Heroicon::UserCircle,
+                size: IconSize::Large
+            )
+            ->toHtml();
+            ?>
+        <?php } ?>
+        <?= $user->name ?? $this->emptyHeaderName ?>
 <?php return ob_get_clean();
     }
 
@@ -319,7 +347,7 @@ trait HasListFilters
 
         return $activityModel::query()
             ->select('causer_id', 'causer_type')
-            ->whereNotNull('causer_id')
+            ->when(! $this->withNullCauser, fn (Builder $query) => $query->whereNotNull('causer_id'))
             ->with('causer')
             ->groupBy('causer_id', 'causer_type')
             ->when(
@@ -332,7 +360,7 @@ trait HasListFilters
             ->limit(10)
             ->get(['causer_id', 'causer_type'])
             ->map(fn ($activity) => [
-                'value' => "{$activity->causer_type}:{$activity->causer_id}",
+                'value' => ($activity->causer_type ?? $this->emptyHeaderName) . ':' . ($activity->causer_id ?? $this->emptyHeaderName),
                 'label' => $this->getAvatarOptionsHtml($activity->causer),
             ])
             ->pluck('label', 'value');
@@ -355,7 +383,7 @@ trait HasListFilters
             ->first();
 
         if (! $activity) {
-            return null;
+            return $this->getAvatarOptionsHtml();
         }
 
         return $this->getAvatarOptionsHtml($activity->causer);

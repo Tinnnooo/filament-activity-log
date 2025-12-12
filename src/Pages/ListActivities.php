@@ -50,6 +50,8 @@ abstract class ListActivities extends Page implements HasSchemas
         return __('filament-activity-log::activities.title');
     }
 
+    public bool $withNullCauser = true;
+
     public string $emptyHeaderName = 'Unknown';
 
     public function mount(): void
