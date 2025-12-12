@@ -34,13 +34,13 @@ trait HasEmbedContent
 
                 <?php if ($date !== $prevDate) { ?>
                     <div <?= (new ComponentAttributeBag)
-                                ->class([
-                                    'px-4 py-2 w-fit mx-auto',
-                                    'shadow-md rounded-full',
-                                    'bg-white text-gray-600 text-sm font-medium',
-                                    'dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300',
-                                    'sticky top-2',
-                                ])->toHtml() ?>>
+                    ->class([
+                        'px-4 py-2 w-fit mx-auto',
+                        'shadow-md rounded-full',
+                        'bg-white text-gray-600 text-sm font-medium',
+                        'dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300',
+                        'sticky top-2',
+                    ])->toHtml() ?>>
                         <?= $date ?>
                     </div>
 
@@ -89,18 +89,18 @@ trait HasEmbedContent
 
             // Changes state
             $changes = $record->getChangesAttribute();
-            $attributes = (array) ($changes['attributes'] ?? []);
-            $old = (array) ($changes['old'] ?? []);
-            $hasChanges = ! empty($attributes);
-            $hasOld = ! empty($old);
+        $attributes = (array) ($changes['attributes'] ?? []);
+        $old = (array) ($changes['old'] ?? []);
+        $hasChanges = ! empty($attributes);
+        $hasOld = ! empty($old);
 
-            // Inline state
-            $isInlineSingle = count($attributes) === 1;
-            $inlineField = $hasOld && $isInlineSingle ? Helper::resolveInlineField($logger, $attributes, $old) : null;
+        // Inline state
+        $isInlineSingle = count($attributes) === 1;
+        $inlineField = $hasOld && $isInlineSingle ? Helper::resolveInlineField($logger, $attributes, $old) : null;
 
-            // Description state
-            $shouldShowDescription = $logger->shouldShowDescription();
-            ?>
+        // Description state
+        $shouldShowDescription = $logger->shouldShowDescription($record);
+        ?>
 
             <?= $this->getHeaderHtml(
                 hasChanges: $hasChanges,
@@ -215,7 +215,7 @@ trait HasEmbedContent
                                 'x-bind:class' => "{ '-rotate-180': !isCollapsed }",
                             ])
                     )
-                        ->toHtml() ?>
+                    ->toHtml() ?>
                 <?php } ?>
             </div>
         </div>
@@ -340,7 +340,7 @@ trait HasEmbedContent
             <div
                 <?= (new ComponentAttributeBag)
                     ->class([
-                        'bg-gray-100 px-2 py-1 rounded text-sm dark:bg-gray-800 dark:text-gray-300 mt-2',
+                        'bg-gray-100 px-2 py-1 rounded-lg text-sm dark:bg-gray-800 dark:text-gray-300 mt-2',
                     ])
                     ->toHtml() ?>>
                 <?= $record->description ?>

@@ -303,7 +303,7 @@ final class TableHelper
                 ->merge([
                     'x-show' => '!isCollapsed',
                 ])
-            ?>>
+        ?>>
             <?= TableHelper::getTableHtml(
                 headerCells: $headerCells,
                 bodyRows: $bodyRows,
