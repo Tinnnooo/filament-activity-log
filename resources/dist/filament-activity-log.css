@@ -298,9 +298,6 @@
   .top-20 {
     top: calc(var(--spacing) * 20);
   }
-  .top-25 {
-    top: calc(var(--spacing) * 25);
-  }
   .top-\[-1px\] {
     top: -1px;
   }
@@ -324,9 +321,6 @@
   }
   .z-50 {
     z-index: 50;
-  }
-  .z-100 {
-    z-index: 100;
   }
   .container {
     width: 100%;
@@ -921,12 +915,6 @@
   .py-2 {
     padding-block: calc(var(--spacing) * 2);
   }
-  .py-2\! {
-    padding-block: calc(var(--spacing) * 2) !important;
-  }
-  .py-2\.5 {
-    padding-block: calc(var(--spacing) * 2.5);
-  }
   .py-3 {
     padding-block: calc(var(--spacing) * 3);
   }
@@ -1046,6 +1034,9 @@
   }
   .whitespace-nowrap {
     white-space: nowrap;
+  }
+  .whitespace-pre-wrap {
+    white-space: pre-wrap;
   }
   .text-amber-900 {
     color: var(--color-amber-900);
@@ -1179,12 +1170,6 @@
   }
   .ring-gray-300 {
     --tw-ring-color: var(--gray-300);
-  }
-  .ring-gray-300\/70 {
-    --tw-ring-color: var(--gray-300);
-    @supports (color: color-mix(in lab, red, red)) {
-      --tw-ring-color: color-mix(in oklab, var(--gray-300) 70%, transparent);
-    }
   }
   .ring-gray-950\/10 {
     --tw-ring-color: var(--gray-950);
@@ -1418,11 +1403,6 @@
       color: var(--gray-800);
     }
   }
-  .sm\:top-20 {
-    @media (width >= 40rem) {
-      top: calc(var(--spacing) * 20);
-    }
-  }
   .sm\:mb-16 {
     @media (width >= 40rem) {
       margin-bottom: calc(var(--spacing) * 16);
@@ -1510,16 +1490,6 @@
       &:last-of-type {
         padding-inline-end: calc(var(--spacing) * 3);
       }
-    }
-  }
-  .md\:top-20 {
-    @media (width >= 48rem) {
-      top: calc(var(--spacing) * 20);
-    }
-  }
-  .lg\:top-20 {
-    @media (width >= 64rem) {
-      top: calc(var(--spacing) * 20);
     }
   }
   .lg\:px-8 {
@@ -1619,11 +1589,6 @@
   .dark\:border-gray-600 {
     &:where(.dark, .dark *) {
       border-color: var(--gray-600);
-    }
-  }
-  .dark\:border-gray-800 {
-    &:where(.dark, .dark *) {
-      border-color: var(--gray-800);
     }
   }
   .dark\:border-neutral-500 {
@@ -1742,11 +1707,6 @@
   .dark\:bg-gray-900 {
     &:where(.dark, .dark *) {
       background-color: var(--gray-900);
-    }
-  }
-  .dark\:bg-gray-950 {
-    &:where(.dark, .dark *) {
-      background-color: var(--gray-950);
     }
   }
   .dark\:bg-neutral-400 {
