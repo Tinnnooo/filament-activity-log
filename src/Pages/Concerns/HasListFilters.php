@@ -9,7 +9,8 @@ use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
-use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Collection;
+use Illuminate\View\ComponentAttributeBag;
 use Malzariey\FilamentDaterangepickerFilter\Fields\DateRangePicker;
 use Noin\FilamentActivityLog\Loggers\Loggers;
 use Spatie\Activitylog\Models\Activity;
@@ -143,6 +144,7 @@ trait HasListFilters
         return DateRangePicker::make('date_range')
             ->useRangeLabels()
             ->alwaysShowCalendar(false)
+            ->disableClear(false)
             ->label(__('filament-activity-log::activities.filters.date'))
             ->placeholder(__('filament-activity-log::activities.filters.date'));
     }
@@ -153,26 +155,11 @@ trait HasListFilters
             ->label(__('filament-activity-log::activities.filters.causer'))
             ->native(false)
             ->allowHtml()
-            ->options(function () {
-                $causers = Activity::query()
-                    ->with('causer')
-                    ->groupBy('causer_id', 'causer_type')
-                    ->get(['causer_id', 'causer_type'])
-                    ->filter(fn ($activity) => $activity->causer instanceof Model)
-                    ->map(fn ($activity) => [
-                        'value' => "{$activity->causer_type}:{$activity->causer_id}",
-                        'label' => Blade::render(
-                            '<x-filament::avatar
-                                src="' . filament()->getUserAvatarUrl($activity->causer) . '"
-                                size="sm"
-                                class="inline mr-2"
-                            /> ' . $activity->causer?->name
-                        ),
-                    ])
-                    ->pluck('label', 'value');
-
-                return $causers;
-            });
+            ->searchable()
+            ->optionsLimit(10)
+            ->options(fn () => $this->getCauserOptions())
+            ->getSearchResultsUsing(fn (?string $search) => $this->getCauserOptions($search))
+            ->getOptionLabelUsing(fn (?string $value): ?string => $this->getCauserOptionLabel($value));
     }
 
     protected function getSubjectTypeField()
@@ -287,7 +274,9 @@ trait HasListFilters
             ->visible(fn (callable $get) => $get('subject_type'))
             ->native(false)
             ->options(function (callable $get) {
-                $events = Activity::query()
+                $activityModel = config('activitylog.activity_model') ?? Activity::class;
+
+                $events = $activityModel::query()
                     ->where('subject_type', $get('subject_type'))
                     ->groupBy('event')
                     ->pluck('event')
@@ -299,5 +288,74 @@ trait HasListFilters
 
                 return $events;
             });
+    }
+
+    protected function getAvatarOptionsHtml(?Model $user): string
+    {
+        $src = filament()->getUserAvatarUrl($user);
+        $alt = __('filament-activity-log::activities.filters.causer_avatar_alt', ['name' => $user?->name ?? '']);
+        ob_start(); ?>
+        <img
+            src="<?= $src ?>"
+            alt="<?= $alt ?>"
+            loading="lazy"
+            <?= (new ComponentAttributeBag)
+                ->class([
+                    'fi-avatar',
+                    'fi-circular',
+                    'fi-size-sm',
+                    'inline mr-2',
+                ])
+                ->toHtml() ?> />
+        <?= $user->name ?? '-' ?>
+<?php return ob_get_clean();
+    }
+
+    protected function getCauserOptions(?string $search = null): Collection
+    {
+        $activityModel = config('activitylog.activity_model') ?? Activity::class;
+
+        return $activityModel::query()
+            ->select('causer_id', 'causer_type')
+            ->whereNotNull('causer_id')
+            ->with('causer')
+            ->groupBy('causer_id', 'causer_type')
+            ->when(
+                $search,
+                fn (Builder $query) => $query->whereHas(
+                    'causer',
+                    fn (Builder $query) => $query->where('name', 'like', "%{$search}%")
+                )
+            )
+            ->limit(10)
+            ->get(['causer_id', 'causer_type'])
+            ->map(fn ($activity) => [
+                'value' => "{$activity->causer_type}:{$activity->causer_id}",
+                'label' => $this->getAvatarOptionsHtml($activity->causer),
+            ])
+            ->pluck('label', 'value');
+    }
+
+    protected function getCauserOptionLabel(?string $value): ?string
+    {
+        if (empty($value) || ! str_contains($value, ':')) {
+            return null;
+        }
+
+        [$causer_type, $causer_id] = explode(':', $value);
+
+        $activityModel = config('activitylog.activity_model') ?? Activity::class;
+
+        $activity = $activityModel::query()
+            ->where('causer_type', $causer_type)
+            ->where('causer_id', $causer_id)
+            ->with('causer')
+            ->first();
+
+        if (! $activity) {
+            return null;
+        }
+
+        return $this->getAvatarOptionsHtml($activity->causer);
     }
 }
