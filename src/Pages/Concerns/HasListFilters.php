@@ -274,7 +274,6 @@ trait HasListFilters
             ->label(__('filament-activity-log::activities.filters.event'))
             ->visible(fn (callable $get) => $get('subject_type'))
             ->native(false)
-            ->searchable()
             ->options(function (callable $get) {
                 $activityModel = config('activitylog.activity_model') ?? Activity::class;
 
