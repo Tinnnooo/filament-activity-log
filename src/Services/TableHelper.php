@@ -16,7 +16,7 @@ final class TableHelper
         bool $withHeader = true,
     ): string {
         ob_start(); ?>
-        <div class="border border-gray-200 dark:border-gray-800 rounded-lg overflow-x-auto">
+        <div class="border border-gray-200 dark:border-gray-600 rounded-lg overflow-x-auto">
             <table class="w-full table-fixed fi-ta-table text-start text-sm">
                 <?php if ($withHeader) { ?>
                     <?php if ($logger) { ?>
@@ -42,7 +42,7 @@ final class TableHelper
         array $cells
     ): string {
         ob_start(); ?>
-        <thead class="bg-gray-50 dark:bg-gray-950">
+        <thead class="bg-gray-50 dark:bg-gray-900 text-gray-700 dark:text-gray-300">
             <tr>
                 <?php foreach ($cells as $cell) { ?>
                     <?= $cell ?>
@@ -60,7 +60,8 @@ final class TableHelper
         <th
             <?= $attributes
                 ->class([
-                    'fi-ta-header-cell px-3 py-2.5 text-left font-medium text-gray-700 dark:text-gray-300 text-sm',
+                    'fi-ta-header-cell px-3 py-2 text-left font-medium text-gray-700 dark:text-gray-300 text-sm',
+                    'border-r border-gray-200 dark:border-gray-600 last:border-r-0',
                 ])
                 ->toHtml() ?>>
             <span class="items-center justify-start w-full group flex gap-x-1 flex-wrap">
@@ -92,9 +93,6 @@ final class TableHelper
                 self::getTableBodyCellHtml(
                     value: $field->getLabel(),
                     attributes: (new ComponentAttributeBag)
-                        ->class([
-                            'px-4 py-2 align-top border-r border-gray-200 last:border-r-0',
-                        ])
                 ),
             ];
 
@@ -106,9 +104,7 @@ final class TableHelper
                         newValue: $newValue
                     ),
                     attributes: (new ComponentAttributeBag)
-                        ->class([
-                            'px-4 py-2 break-all whitespace-normal! last:border-r-0',
-                        ])
+
                         ->merge([
                             'colspan' => '2',
                         ])
@@ -120,16 +116,10 @@ final class TableHelper
                         self::getTableBodyCellHtml(
                             value: $field->display($oldValue),
                             attributes: (new ComponentAttributeBag)
-                                ->class([
-                                    'px-4 py-2 overflow-x-auto align-top border-r border-gray-200 last:border-r-0',
-                                ])
                         ),
                         self::getTableBodyCellHtml(
                             value: $field->display($newValue),
                             attributes: (new ComponentAttributeBag)
-                                ->class([
-                                    'px-4 py-2 overflow-x-auto align-top last:border-r-0"',
-                                ])
                         ),
                     ]
                 );
@@ -156,16 +146,10 @@ final class TableHelper
                 self::getTableBodyCellHtml(
                     value: $field->getLabel(),
                     attributes: (new ComponentAttributeBag)
-                        ->class([
-                            'px-4 py-2 align-top border-r border-gray-200 last:border-r-0',
-                        ])
                 ),
                 self::getTableBodyCellHtml(
                     value: $field->display($newValue),
                     attributes: (new ComponentAttributeBag)
-                        ->class([
-                            'px-4 py-2 align-top last:border-r-0',
-                        ])
                 ),
             ];
             $rows[] = self::getTableBodyRowHtml($cells);
@@ -191,7 +175,9 @@ final class TableHelper
         <td
             <?= $attributes
                 ->class([
-                    'p-0 fi-ta-cell first-of-type:ps-1 last-of-type:pe-1 sm:first-of-type:ps-3 sm:last-of-type:pe-3',
+                    'fi-ta-cell px-3 py-2 align-top text-left text-gray-700 dark:text-gray-300 text-sm',
+                    'border-r border-gray-200 dark:border-gray-600 last:border-r-0',
+                    'overflow-x-auto',
                 ])
                 ->toHtml() ?>>
             <?= $value ?>
@@ -224,54 +210,39 @@ final class TableHelper
     {
         $headerCells = [
             'default' => [
-                TableHelper::getTableHeaderCellHtml(
+                self::getTableHeaderCellHtml(
                     value: __('filament-activity-log::activities.table.field'),
                     attributes: (new ComponentAttributeBag)
-                        ->class([
-                            'py-2! border-r border-gray-200 last:border-r-0',
-                        ])
                         ->merge([
                             'width' => '20%',
                         ])
                 ),
-                TableHelper::getTableHeaderCellHtml(
+                self::getTableHeaderCellHtml(
                     value: __('filament-activity-log::activities.table.old'),
                     attributes: (new ComponentAttributeBag)
-                        ->class([
-                            'py-2! border-r border-gray-200 last:border-r-0',
-                        ])
                         ->merge([
                             'width' => '40%',
                         ])
                 ),
-                TableHelper::getTableHeaderCellHtml(
+                self::getTableHeaderCellHtml(
                     value: __('filament-activity-log::activities.table.new'),
                     attributes: (new ComponentAttributeBag)
-                        ->class([
-                            'py-2! last:border-r-0',
-                        ])
                         ->merge([
                             'width' => '40%',
                         ])
                 ),
             ],
             'simple' => [
-                TableHelper::getTableHeaderCellHtml(
+                self::getTableHeaderCellHtml(
                     value: __('filament-activity-log::activities.table.field'),
                     attributes: (new ComponentAttributeBag)
-                        ->class([
-                            'py-2! border-r border-gray-200 last:border-r-0',
-                        ])
                         ->merge([
                             'width' => '20%',
                         ])
                 ),
-                TableHelper::getTableHeaderCellHtml(
+                self::getTableHeaderCellHtml(
                     value: __('filament-activity-log::activities.table.value'),
                     attributes: (new ComponentAttributeBag)
-                        ->class([
-                            'py-2! last:border-r-0',
-                        ])
                         ->merge([
                             'width' => '80%',
                         ])
@@ -282,12 +253,12 @@ final class TableHelper
         $bodyRows = [];
 
         if ($hasOld) {
-            $bodyRows = TableHelper::getTableBodyDefaultHtml(
+            $bodyRows = self::getTableBodyDefaultHtml(
                 changes: $changes,
                 logger: $logger,
             );
         } else {
-            $bodyRows = TableHelper::getTableBodySimpleHtml(
+            $bodyRows = self::getTableBodySimpleHtml(
                 changes: $changes,
                 logger: $logger,
             );
@@ -304,7 +275,7 @@ final class TableHelper
                     'x-show' => '!isCollapsed',
                 ])
         ?>>
-            <?= TableHelper::getTableHtml(
+            <?= self::getTableHtml(
                 headerCells: $headerCells,
                 bodyRows: $bodyRows,
                 hasOld: $hasOld,

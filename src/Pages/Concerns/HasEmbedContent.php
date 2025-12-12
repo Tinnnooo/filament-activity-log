@@ -3,10 +3,8 @@
 namespace Noin\FilamentActivityLog\Pages\Concerns;
 
 use App\Models\User;
-use Filament\Support\Enums\Size;
 use Filament\Support\Icons\Heroicon;
 use Filament\Support\View\Components\BadgeComponent;
-use Filament\Support\View\Concerns\CanGenerateBadgeHtml;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\View\ComponentAttributeBag;
 use Noin\FilamentActivityLog\Loggers\Logger;
@@ -36,14 +34,14 @@ trait HasEmbedContent
 
                 <?php if ($date !== $prevDate) { ?>
                     <div <?= (new ComponentAttributeBag)
-                                ->class([
-                                    'px-4 py-2 w-54 mx-auto text-center',
-                                    'shadow-md rounded-full',
-                                    'bg-white text-gray-600 text-sm font-medium',
-                                    'dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300',
-                                    'sticky top-20 z-10',
-                                    'ring-1 ring-gray-200 dark:ring-gray-700',
-                                ])->toHtml() ?>>
+                    ->class([
+                        'px-4 py-2 w-54 mx-auto text-center',
+                        'shadow-md rounded-full',
+                        'bg-white text-gray-600 text-sm font-medium',
+                        'dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300',
+                        'sticky top-20 z-10',
+                        'ring-1 ring-gray-200 dark:ring-gray-700',
+                    ])->toHtml() ?>>
                         <?= $date ?>
                     </div>
                     <?php
@@ -91,18 +89,18 @@ trait HasEmbedContent
 
             // Changes state
             $changes = $record->getChangesAttribute();
-            $attributes = (array) ($changes['attributes'] ?? []);
-            $old = (array) ($changes['old'] ?? []);
-            $hasChanges = ! empty($attributes);
-            $hasOld = ! empty($old);
+        $attributes = (array) ($changes['attributes'] ?? []);
+        $old = (array) ($changes['old'] ?? []);
+        $hasChanges = ! empty($attributes);
+        $hasOld = ! empty($old);
 
-            // Inline state
-            $isInlineSingle = count($attributes) === 1;
-            $inlineField = $hasOld && $isInlineSingle ? Helper::resolveInlineField($logger, $attributes, $old) : null;
+        // Inline state
+        $isInlineSingle = count($attributes) === 1;
+        $inlineField = $hasOld && $isInlineSingle ? Helper::resolveInlineField($logger, $attributes, $old) : null;
 
-            // Description state
-            $shouldShowDescription = $logger->shouldShowDescription($record);
-            ?>
+        // Description state
+        $shouldShowDescription = $logger->shouldShowDescription($record);
+        ?>
 
             <?= $this->getHeaderHtml(
                 hasChanges: $hasChanges,
@@ -217,7 +215,7 @@ trait HasEmbedContent
                                 'x-bind:class' => "{ '-rotate-180': !isCollapsed }",
                             ])
                     )
-                        ->toHtml() ?>
+                    ->toHtml() ?>
                 <?php } ?>
             </div>
         </div>
