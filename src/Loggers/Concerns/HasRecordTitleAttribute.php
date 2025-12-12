@@ -11,7 +11,7 @@ trait HasRecordTitleAttribute
 
     public function getRecordTitleAttribute(): string
     {
-        return $this->recordTitleAttribute ?? Filament::getModelResource(static::$model)::getRecordTitleAttribute();
+        return $this->recordTitleAttribute ?? Filament::getModelResource(static::$model)::getRecordTitleAttribute() ?? 'id';
     }
 
     public function getRelationTitleAttribute(string | Model $modelClass): string
