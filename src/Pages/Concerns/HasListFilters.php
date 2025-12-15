@@ -363,7 +363,15 @@ trait HasListFilters
                 'value' => ($activity->causer_type ?? $this->emptyHeaderName) . ':' . ($activity->causer_id ?? $this->emptyHeaderName),
                 'label' => $this->getAvatarOptionsHtml($activity->causer),
             ])
-            ->pluck('label', 'value');
+            ->pluck('label', 'value')
+            ->when($this->withNullCauser, function (Collection $options) {
+                $options->prepend(
+                    $this->getAvatarOptionsHtml(),
+                    $this->emptyHeaderName . ':' . $this->emptyHeaderName
+                );
+
+                return $options;
+            });
     }
 
     protected function getCauserOptionLabel(?string $value): ?string
