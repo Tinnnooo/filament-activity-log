@@ -5,12 +5,12 @@ namespace Noin\FilamentActivityLog\Pages\Concerns;
 use Filament\Support\Enums\IconSize;
 use Filament\Support\Icons\Heroicon;
 use Filament\Support\View\Components\BadgeComponent;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\View\ComponentAttributeBag;
 use Noin\FilamentActivityLog\Loggers\Logger;
 use Noin\FilamentActivityLog\Services\Helper;
 use Noin\FilamentActivityLog\Services\TableHelper;
-use Illuminate\Contracts\Auth\Authenticatable;
 
 use function Filament\Support\generate_icon_html;
 
@@ -334,7 +334,7 @@ trait HasEmbedContent
     <?php return ob_get_clean();
     }
 
-    public function getAvatarHtml(Model | Authenticatable  $user): string
+    public function getAvatarHtml(Model | Authenticatable $user): string
     {
         $src = filament()->getUserAvatarUrl($user);
         $alt = __('filament-panels::layout.avatar.alt', ['name' => filament()->getUserName($user)]);

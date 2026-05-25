@@ -3,7 +3,6 @@
 namespace Noin\FilamentActivityLog\Extensions;
 
 use Closure;
-use Filament\Actions as PageActions;
 use Filament\Actions\AttachAction;
 use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteAction;
@@ -56,12 +55,12 @@ class LogActions
         RestoreBulkAction::class => 'restoreBulk',
 
         // * ----------- Page Actions -----------
-        PageActions\CreateAction::class => 'create',
-        PageActions\DeleteAction::class => 'delete',
-        PageActions\EditAction::class => 'edit',
-        PageActions\ForceDeleteAction::class => 'delete',
-        PageActions\ReplicateAction::class => 'create',
-        PageActions\RestoreAction::class => 'restore',
+        CreateAction::class => 'create',
+        DeleteAction::class => 'delete',
+        EditAction::class => 'edit',
+        ForceDeleteAction::class => 'delete',
+        ReplicateAction::class => 'create',
+        RestoreAction::class => 'restore',
 
         // * ----------- Editable Columns -----------
         CheckboxColumn::class => 'editableColumn',
