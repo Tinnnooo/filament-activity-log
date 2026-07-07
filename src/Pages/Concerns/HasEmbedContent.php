@@ -7,7 +7,6 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Support\View\Components\BadgeComponent;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Collection;
 use Illuminate\View\ComponentAttributeBag;
 use Noin\FilamentActivityLog\Loggers\Logger;
 use Noin\FilamentActivityLog\Services\Helper;
@@ -104,6 +103,7 @@ trait HasEmbedContent
                 'x-data' => "{ isCollapsed: $isCollapsed, hasLazyContentLoaded: $hasLazyContentLoaded, hasLazyContentRequested: $hasLazyContentLoaded, isLazyContentLoading: false }",
                 '@collapse-all.window' => '() => { isCollapsed = true }',
                 '@expand-all.window' => '() => { isCollapsed = false }',
+                'wire:key' => "activity-log-record-{$recordKey}",
             ]);
         ?>
         <div
@@ -142,10 +142,7 @@ trait HasEmbedContent
             <?php if (empty($inlineField) && $hasChanges) { ?>
                 <?php if ($this->isLazy && $this->isCollapsible) { ?>
                     <?= $this->getLazyChangesHtml(
-                        record: $record,
-                        hasOld: $hasOld,
-                        changes: $changes,
-                        logger: $logger,
+                        record: $record
                     ) ?>
                 <?php } else { ?>
                     <?= TableHelper::getTableTemplateHtml(
@@ -406,81 +403,86 @@ trait HasEmbedContent
     {
         $recordKey = (string) $recordKey;
 
-        $fallbackHtml = '<div class="mt-2 rounded-lg border border-dashed border-gray-300 p-3 text-sm text-gray-500 dark:border-gray-700 dark:text-gray-300">No change details available.</div>';
-
         if ($this->isRecordLazyContentLoaded($recordKey)) {
             return;
         }
 
-        $activityModel = config('activitylog.activity_model') ?? Activity::class;
-
-        $query = $activityModel::query()->with('causer', 'subject');
-
-        if ($this->isLazy) {
-            $query->select([
-                'id',
-                'event',
-                'description',
-                'causer_id',
-                'causer_type',
-                'subject_id',
-                'subject_type',
-                'created_at',
-                'properties',
-            ]);
-        }
-
-        $record = $query->find($recordKey);
+        $record = Activity::query()
+            ->with('causer', 'subject')
+            ->find($recordKey);
 
         if (! $record) {
-            $this->lazyLoadedRecordContent[$recordKey] = $fallbackHtml;
-            $this->lazyLoadedRecordState[$recordKey] = true;
-
             return;
         }
 
-        $this->lazyLoadedRecordRelationManager[$recordKey] = (array) (data_get($record->properties, 'relation_manager') ?? []);
-
-        $logger = $this->getLogger($record);
-
-        if (! $logger) {
-            $this->lazyLoadedRecordContent[$recordKey] = $fallbackHtml;
-            $this->lazyLoadedRecordState[$recordKey] = true;
-
-            return;
-        }
-
-        $changes = collect($record->getChangesAttribute());
-        $attributes = (array) ($changes['attributes'] ?? []);
-        $old = (array) ($changes['old'] ?? []);
-        $hasChanges = ! empty($attributes);
-        $hasOld = ! empty($old);
-
-        if ($hasChanges) {
-            $this->lazyLoadedRecordContent[$recordKey] = TableHelper::getTableTemplateHtml(
-                hasOld: $hasOld,
-                changes: $changes,
-                logger: $logger,
-            );
-        } else {
-            $this->lazyLoadedRecordContent[$recordKey] = $fallbackHtml;
-        }
+        $this->lazyLoadedRecordContent[$recordKey] = $this->buildLazyContent($record);
 
         $this->lazyLoadedRecordState[$recordKey] = true;
     }
 
-    protected function getLazyChangesHtml(Model $record, bool $hasOld, Collection $changes, Logger $logger): string
+    public function loadAllLazyRecordContent(): void
+    {
+        $keys = collect($this->records)
+            ->map(fn ($record) => $record->getKey());
+
+        $records = Activity::query()
+            ->with('causer', 'subject')
+            ->whereIn('id', $keys)
+            ->get();
+
+        foreach ($records as $record) {
+            $recordKey = (string) $record->getKey();
+
+            $this->lazyLoadedRecordContent[$recordKey] = $this->buildLazyContent($record);
+
+            $this->lazyLoadedRecordState[$recordKey] = true;
+        }
+    }
+
+    protected function buildLazyContent(Activity $record): string
+    {
+        $fallbackHtml = '<div class="mt-2 rounded-lg border border-dashed border-gray-300 p-3 text-sm text-gray-500 dark:border-gray-700 dark:text-gray-300">No change details available.</div>';
+
+        $this->lazyLoadedRecordRelationManager[$record->id] = (array) (
+            data_get($record->properties, 'relation_manager') ?? []
+        );
+
+        $logger = $this->getLogger($record);
+
+        if (! $logger) {
+            return $fallbackHtml;
+        }
+
+        $changes = collect($record->getChangesAttribute());
+
+        $attributes = (array) ($changes['attributes'] ?? []);
+        $old = (array) ($changes['old'] ?? []);
+
+        if (empty($attributes)) {
+            return $fallbackHtml;
+        }
+
+        return TableHelper::getTableTemplateHtml(
+            hasOld: ! empty($old),
+            changes: $changes,
+            logger: $logger,
+        );
+    }
+
+    public function expandAll(): void
+    {
+        $this->loadAllLazyRecordContent();
+
+        $this->dispatch('expand-all');
+    }
+
+    protected function getLazyChangesHtml(Model $record): string
     {
         $recordKey = $this->getRecordKey($record);
 
         if ($this->isRecordLazyContentLoaded($recordKey)) {
             return $this->lazyLoadedRecordContent[$recordKey] ?? '';
         }
-
-        $lazyExpression = sprintf(
-            '!isCollapsed && !hasLazyContentLoaded && !hasLazyContentRequested && !isLazyContentLoading && (hasLazyContentRequested = true, isLazyContentLoading = true, $wire.loadLazyRecordContent(%s).finally(() => { isLazyContentLoading = false }))',
-            json_encode($recordKey, JSON_THROW_ON_ERROR)
-        );
 
         ob_start(); ?>
         <div
@@ -492,7 +494,25 @@ trait HasEmbedContent
                 ->merge([
                     'x-show' => '!isCollapsed',
                     'x-cloak' => '',
-                    'x-effect' => $lazyExpression,
+                    'x-effect' => '
+                    (() => {
+                        if (
+                            !isCollapsed &&
+                            !hasLazyContentLoaded &&
+                            !hasLazyContentRequested &&
+                            !isLazyContentLoading
+                        ) {
+                            hasLazyContentRequested = true;
+                            isLazyContentLoading = true;
+
+                            $wire.loadLazyRecordContent(' . json_encode($recordKey, JSON_THROW_ON_ERROR) . ')
+                                .finally(() => {
+                                    isLazyContentLoading = false;
+                                    hasLazyContentLoaded = true;
+                                });
+                        }
+                    })()
+                    ',
                 ])
                 ->toHtml() ?>>
             <span x-show="isLazyContentLoading || !hasLazyContentLoaded">
