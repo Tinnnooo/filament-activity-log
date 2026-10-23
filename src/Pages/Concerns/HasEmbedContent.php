@@ -48,7 +48,7 @@ trait HasEmbedContent
                         'bg-white text-gray-600 text-sm font-medium',
                         'dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300',
                         'sticky top-20 z-10',
-                        'ring-1 ring-gray-200 dark:ring-gray-700',
+                        'border border-gray-200 dark:ring-gray-700',
                     ])->toHtml() ?>>
                         <?= $date ?>
                     </div>
@@ -221,7 +221,7 @@ trait HasEmbedContent
                 <?php } ?>
 
                 <div class="flex flex-col text-left">
-                    <span class="font-semibold dark:text-gray-300">
+                    <span class="font-semibold text-gray-900 dark:text-gray-300">
                         <?= $record->causer?->name ?? $this->emptyHeaderName ?>
                     </span>
                     <span class="text-xs text-gray-700 dark:text-gray-200">

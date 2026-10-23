@@ -88,7 +88,7 @@ abstract class ListActivities extends Page implements HasSchemas
         if ($this->isLazy) {
             $model = new $activityModel;
             $columns = $model->getConnection()->getSchemaBuilder()->getColumnListing($model->getTable());
-            $columns = array_values(array_filter($columns, fn(string $column): bool => $column !== 'properties'));
+            $columns = array_values(array_filter($columns, fn (string $column): bool => $column !== 'properties'));
 
             if (! empty($columns)) {
                 $query->select($columns);

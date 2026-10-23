@@ -17,3 +17,5 @@ _site/
 *.gem
 .bundle
 .ruby-version
+composer.lock
+package-lock.json
