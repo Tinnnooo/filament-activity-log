@@ -2,7 +2,7 @@
 
 namespace Noin\FilamentActivityLog\ResourceLogger\Types;
 
-use DragonCode\Support\Concerns\Makeable;
+use Noin\FilamentActivityLog\Loggers\Concerns\Makeable;
 use Noin\FilamentActivityLog\ResourceLogger\Concerns\HasFields;
 
 class TableField

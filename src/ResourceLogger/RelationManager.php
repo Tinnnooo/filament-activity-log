@@ -2,7 +2,7 @@
 
 namespace Noin\FilamentActivityLog\ResourceLogger;
 
-use DragonCode\Support\Concerns\Makeable;
+use Noin\FilamentActivityLog\Loggers\Concerns\Makeable;
 use Noin\FilamentActivityLog\ResourceLogger\Concerns\HasFields;
 use Noin\FilamentActivityLog\ResourceLogger\Concerns\HasLabel;
 use Noin\FilamentActivityLog\ResourceLogger\Concerns\HasName;

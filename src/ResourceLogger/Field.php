@@ -2,9 +2,9 @@
 
 namespace Noin\FilamentActivityLog\ResourceLogger;
 
-use DragonCode\Support\Concerns\Makeable;
 use Filament\Forms\Components\Concerns\CanAllowHtml;
 use Filament\Support\Concerns\EvaluatesClosures;
+use Noin\FilamentActivityLog\Loggers\Concerns\Makeable;
 use Noin\FilamentActivityLog\ResourceLogger\Concerns\CanDisplay;
 use Noin\FilamentActivityLog\ResourceLogger\Concerns\CanStore;
 use Noin\FilamentActivityLog\ResourceLogger\Concerns\FieldResolver;

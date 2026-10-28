@@ -3,7 +3,6 @@
 namespace Noin\FilamentActivityLog\Loggers;
 
 use Closure;
-use DragonCode\Support\Concerns\Makeable;
 use Illuminate\Database\Eloquent\Model;
 use Noin\FilamentActivityLog\Loggers\Concerns\HasCaused;
 use Noin\FilamentActivityLog\Loggers\Concerns\HasDescription;
@@ -14,6 +13,7 @@ use Noin\FilamentActivityLog\Loggers\Concerns\HasRecordTitleAttribute;
 use Noin\FilamentActivityLog\Loggers\Concerns\HasRelationManager;
 use Noin\FilamentActivityLog\Loggers\Concerns\HasResourceLogger;
 use Noin\FilamentActivityLog\Loggers\Concerns\Loggable;
+use Noin\FilamentActivityLog\Loggers\Concerns\Makeable;
 
 class Logger
 {
